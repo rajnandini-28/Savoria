@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Kitchen Dispatch & Brigade Orders Dashboard — SAVORIA Staff</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff-dashboard-body">
+    <!-- Staff Header -->
+    <header class="staff-header">
+        <div class="container staff-nav-container">
+            <div class="staff-logo">
+                <span class="logo-symbol">❖</span>
+                <div>
+                    <span class="staff-title">SAVORIA KITCHEN & DISPATCH</span>
+                    <span class="staff-badge"><i class="fa-solid fa-lock"></i> Staff Internal Portal</span>
+                </div>
+            </div>
+
+            <div class="staff-actions">
+                <span class="staff-live-badge"><span class="pulse-dot"></span> Live Kitchen Line Active</span>
+                <button type="button" class="btn btn-sm btn-outline" onclick="loadStaffOrders()">
+                    <i class="fa-solid fa-rotate"></i> Refresh Line
+                </button>
+                <a href="index.html" class="btn btn-sm btn-secondary">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Guest Website
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Staff Content -->
+    <main class="staff-main">
+        <div class="container">
+            <!-- Summary Counters -->
+            <div class="staff-stats-grid">
+                <div class="staff-stat-card">
+                    <div class="st-icon gold"><i class="fa-solid fa-fire-burner"></i></div>
+                    <div>
+                        <span class="st-num" id="statKitchenActive">0</span>
+                        <span class="st-lbl">Active in Kitchen Line</span>
+                    </div>
+                </div>
+
+                <div class="staff-stat-card">
+                    <div class="st-icon purple"><i class="fa-solid fa-wine-glass"></i></div>
+                    <div>
+                        <span class="st-num" id="statCellarPending">0</span>
+                        <span class="st-lbl">Cellar & Wine Dispatches</span>
+                    </div>
+                </div>
+
+                <div class="staff-stat-card">
+                    <div class="st-icon green"><i class="fa-solid fa-motorcycle"></i></div>
+                    <div>
+                        <span class="st-num" id="statCourierDispatched">0</span>
+                        <span class="st-lbl">Couriers On Transit</span>
+                    </div>
+                </div>
+
+                <div class="staff-stat-card">
+                    <div class="st-icon blue"><i class="fa-solid fa-circle-check"></i></div>
+                    <div>
+                        <span class="st-num" id="statOrdersToday">0</span>
+                        <span class="st-lbl">Orders Fulfilled Today</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Routing Info Strip -->
+            <div class="staff-routing-banner">
+                <div class="routing-dept">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <div>
+                        <strong>Station 1 (Tandoor & Bhatti Brigade)</strong>
+                        <span>Lead Ustad: Marcus Moreau • Live Charcoal Sigri</span>
+                    </div>
+                </div>
+                <div class="routing-dept">
+                    <i class="fa-solid fa-kitchen-set"></i>
+                    <div>
+                        <strong>Station 2 (Dum Pukht & Curries)</strong>
+                        <span>Head Chef: Elena • Sealed Copper Handi Hearth</span>
+                    </div>
+                </div>
+                <div class="routing-dept">
+                    <i class="fa-solid fa-crown"></i>
+                    <div>
+                        <strong>Station 3 (Halwai & Shahi Bar)</strong>
+                        <span>Master Halwai: Kesar Mithai & Gold Leaf Curation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Stream Grid -->
+            <div class="staff-orders-section">
+                <div class="staff-section-header">
+                    <h2><i class="fa-solid fa-receipt"></i> Incoming Orders & Department Routing Stream</h2>
+                    <span class="staff-subtext">Real-time orders submitted by guests across web & private concierge</span>
+                </div>
+
+                <div class="staff-orders-list" id="staffOrdersList">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Global Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Application Logic -->
+    <script src="app.js?v=3.0"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initStaffDashboard === 'function') {
+                initStaffDashboard();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+{
+  "reservations": [
+    {
+      "id": "res-001",
+      "bookingRef": "SAV-IND-522019",
+      "fullName": "Rajnandini Bhati",
+      "email": "mkd9a32@gmail.com",
+      "phone": "9982072287",
+      "formattedDate": "Monday, 21 September 2026",
+      "timeText": "7:30 PM (Prime)",
+      "seating": "Chef's Open Counter",
+      "guestsText": "4 Guests (Standard Dining)",
+      "status": "confirmed",
+      "specialNotes": "Royal welcoming requested",
+      "createdAt": "2026-09-20T13:52:51.478Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-782190",
+      "orderId": "ORD-782190",
+      "customerName": "Maharaja Digvijay Singh",
+      "phone": "+91 98290 11223",
+      "email": "royal.patron@savoria.in",
+      "orderType": "Dine-In • Shahi Diwan",
+      "tableNumber": "Table T-01",
+      "items": [
+        {
+          "id": "awadhi-nalli-nihari",
+          "title": "Royal Awadhi Nalli Nihari",
+          "quantity": 2,
+          "price": 1450
+        },
+        {
+          "id": "dum-pukht-gosht-biryani",
+          "title": "Awadhi Dum Pukht Gosht Biryani",
+          "quantity": 1,
+          "price": 1250
+        },
+        {
+          "id": "kesar-shahi-tukda",
+          "title": "Kesar Shahi Tukda with 24K Gold Leaf",
+          "quantity": 2,
+          "price": 650
+        }
+      ],
+      "subtotal": 5450,
+      "gst": 272.5,
+      "tip": 545,
+      "total": 6267.5,
+      "status": "Preparing in Royal Rasoi",
+      "station": "Station 2 (Dum Pukht & Curries)",
+      "paymentMethod": "RuPay Black Reserve",
+      "createdAt": "2026-09-20T13:37:51.479Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "cnt-001",
+      "name": "Rajnandini Bhati",
+      "email": "mkd9a32@gmail.com",
+      "phone": "9982072287",
+      "subject": "Private Dining / Corporate Buyout",
+      "message": "We would like to book the Shahi Diwan for an intimate celebration of 12 guests.",
+      "createdAt": "2026-09-20T14:00:00.000Z"
+    }
+  ],
+  "newsletter": [
+    {
+      "email": "mkd9a32@gmail.com",
+      "date": "2026-09-20T14:00:00.000Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev-001",
+      "author": "Countess Victoria Sterling",
+      "title": "An Unrivalled Imperial Triumph",
+      "comment": "The 24-hour slow-cooked Dal Savoria and Awadhi Nalli Nihari transcend gastronomy into spiritual artistry. Truly royal.",
+      "rating": 5,
+      "dish": "Dal Savoria & Nalli Nihari",
+      "date": "September 2026"
+    },
+    {
+      "id": "rev-002",
+      "author": "Master Sommelier Jean-Luc Dupont",
+      "title": "Sensational Wine & Spice Harmony",
+      "comment": "Their Kakori Galouti with aged single malt is arguably one of the greatest culinary pairings in Asia.",
+      "rating": 5,
+      "dish": "Kakori Galouti Kebab",
+      "date": "August 2026"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-admin",
+      "email": "admin@savoria.com",
+      "name": "Imperial Concierge",
+      "role": "admin"
+    }
+  ]
+}

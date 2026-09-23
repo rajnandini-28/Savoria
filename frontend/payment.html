@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment & Authorization — SAVORIA Fine Dining</title>
+    <meta name="description" content="Authorize your artisanal gastronomy order securely with 256-bit TLS encryption. Credit/Debit Card, Apple Pay, or SAVORIA House Account.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css?v=3.5">
+    
+    <!-- Razorpay Live Checkout SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body class="payment-page-body">
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span class="badge-award"><i class="fa-solid fa-shield-halved"></i> 256-Bit Bank-Grade TLS Encryption</span>
+            <div class="top-bar-links">
+                <span class="live-status"><span class="pulse-dot"></span> PCI-DSS Level 1 Certified Gateway</span>
+                <a href="tel:+91XXXXXXXXXX" class="top-phone"><i class="fa-solid fa-phone"></i> +91 XXXXX XXXXX</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="header" id="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-symbol">❖</span>
+                <div class="logo-text-group">
+                    <span class="logo-text">SAVORIA</span>
+                    <span class="logo-sub">HAUTE CUISINE</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="nav-link">Culinary Menu</a></li>
+                <li><a href="index.html#experience" class="nav-link">The Experience</a></li>
+                <li><a href="index.html#reservations" class="nav-link">Reservations</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Cart Pill -->
+                <a href="tray.html" class="cart-pill-btn active-tray-pill" id="cartTriggerBtn" aria-label="View Dining Order Tray">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-pill-text">Order Tray</span>
+                    <span class="cart-badge" id="cartCountBadge">0</span>
+                </a>
+
+                <!-- User Account Dynamic Container -->
+                <div class="user-auth-nav-slot" id="userAuthNavSlot"></div>
+
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-content">
+            <ul class="mobile-links">
+                <li><a href="index.html#hero" class="mobile-link">Home</a></li>
+                <li><a href="index.html#about" class="mobile-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="mobile-link">Culinary Menu</a></li>
+                <li><a href="tray.html" class="mobile-link">Order Tray</a></li>
+                <li><a href="auth.html" class="mobile-link">Member Portal / Sign In</a></li>
+                <li><a href="index.html#reservations" class="mobile-link">Reservations</a></li>
+                <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Payment Section -->
+    <main class="payment-main-section">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <nav class="dish-breadcrumbs" aria-label="Breadcrumbs">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <span>/</span>
+                <a href="tray.html">Order Tray</a>
+                <span>/</span>
+                <span class="active-crumb">Secure Payment Authorization</span>
+            </nav>
+
+            <div class="payment-header-group">
+                <span class="section-tag"><i class="fa-solid fa-lock"></i> ENCRYPTED ROYAL CHECKOUT</span>
+                <h1 class="payment-page-title">Payment & Authorization</h1>
+                <p class="payment-page-sub">Select your preferred Indian luxury payment method (UPI, RuPay/Cards, or Shahi House Account).</p>
+            </div>
+
+            <div class="payment-grid-layout">
+                <!-- Left Column: Payment Methods & Inputs -->
+                <div class="payment-methods-column">
+                    <!-- Method Selector Tabs -->
+                    <div class="payment-methods-nav">
+                        <button type="button" class="pay-tab-btn active" id="tabUpiBtn" onclick="selectPayMethod('upi')">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <span>UPI & QR</span>
+                        </button>
+                        <button type="button" class="pay-tab-btn" id="tabCardBtn" onclick="selectPayMethod('card')">
+                            <i class="fa-regular fa-credit-card"></i>
+                            <span>Cards & RuPay</span>
+                        </button>
+                        <button type="button" class="pay-tab-btn" id="tabNbBtn" onclick="selectPayMethod('netbanking')">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>Net Banking</span>
+                        </button>
+                        <button type="button" class="pay-tab-btn" id="tabWalletBtn" onclick="selectPayMethod('wallets')">
+                            <i class="fa-solid fa-wallet"></i>
+                            <span>Wallets</span>
+                        </button>
+                        <button type="button" class="pay-tab-btn" id="tabPaylaterBtn" onclick="selectPayMethod('paylater')">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <span>Pay Later & EMI</span>
+                        </button>
+                        <button type="button" class="pay-tab-btn" id="tabCodBtn" onclick="selectPayMethod('cod')">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                            <span>Pay on Delivery</span>
+                        </button>
+                        <button type="button" class="pay-tab-btn" id="tabHouseBtn" onclick="selectPayMethod('house-account')">
+                            <i class="fa-solid fa-crown"></i>
+                            <span>House Account</span>
+                        </button>
+                    </div>
+
+                    <!-- 1. UPI INSTANT PAY & QR PANEL -->
+                    <div class="pay-panel-content" id="panelUpi">
+                        <div class="upi-payment-box">
+                            <div class="upi-qr-card">
+                                <svg class="upi-qr-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="100" fill="white"/>
+                                    <!-- Position patterns top-left -->
+                                    <rect x="10" y="10" width="24" height="24" fill="#121019" rx="3"/>
+                                    <rect x="14" y="14" width="16" height="16" fill="white" rx="1"/>
+                                    <rect x="18" y="18" width="8" height="8" fill="#c68a2c" rx="1"/>
+                                    <!-- Position patterns top-right -->
+                                    <rect x="66" y="10" width="24" height="24" fill="#121019" rx="3"/>
+                                    <rect x="70" y="14" width="16" height="16" fill="white" rx="1"/>
+                                    <rect x="74" y="18" width="8" height="8" fill="#c68a2c" rx="1"/>
+                                    <!-- Position patterns bottom-left -->
+                                    <rect x="10" y="66" width="24" height="24" fill="#121019" rx="3"/>
+                                    <rect x="14" y="70" width="16" height="16" fill="white" rx="1"/>
+                                    <rect x="18" y="74" width="8" height="8" fill="#c68a2c" rx="1"/>
+                                    <!-- Data nodes -->
+                                    <rect x="40" y="10" width="6" height="6" fill="#121019"/>
+                                    <rect x="52" y="14" width="6" height="6" fill="#c68a2c"/>
+                                    <rect x="40" y="24" width="6" height="12" fill="#121019"/>
+                                    <rect x="50" y="28" width="8" height="6" fill="#121019"/>
+                                    <rect x="10" y="42" width="12" height="6" fill="#121019"/>
+                                    <rect x="28" y="42" width="18" height="6" fill="#c68a2c"/>
+                                    <rect x="52" y="42" width="12" height="12" fill="#121019"/>
+                                    <rect x="70" y="42" width="20" height="6" fill="#121019"/>
+                                    <rect x="10" y="54" width="6" height="6" fill="#c68a2c"/>
+                                    <rect x="22" y="52" width="12" height="6" fill="#121019"/>
+                                    <rect x="40" y="60" width="18" height="6" fill="#121019"/>
+                                    <rect x="66" y="54" width="6" height="12" fill="#c68a2c"/>
+                                    <rect x="78" y="54" width="12" height="6" fill="#121019"/>
+                                    <rect x="40" y="72" width="6" height="18" fill="#121019"/>
+                                    <rect x="52" y="78" width="14" height="6" fill="#c68a2c"/>
+                                    <rect x="72" y="72" width="18" height="18" fill="#121019"/>
+                                </svg>
+                                <span style="display:block; font-size: 0.75rem; color: #333; font-weight:700; margin-top: 6px;">UPI ID: savoria.royal@icici</span>
+                            </div>
+
+                            <p style="color: var(--text-secondary); font-size: 0.92rem;">Scan with any UPI App (GPay, PhonePe, Paytm, CRED, BHIM) to authorize instantly</p>
+
+                            <div class="upi-apps-grid">
+                                <button type="button" class="upi-app-btn" onclick="handlePaymentAuthorization(event, 'Google Pay UPI')">
+                                    <i class="fa-brands fa-google-pay"></i>
+                                    <span>Google Pay</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="handlePaymentAuthorization(event, 'PhonePe UPI')">
+                                    <i class="fa-solid fa-mobile-screen"></i>
+                                    <span>PhonePe</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="handlePaymentAuthorization(event, 'Paytm UPI')">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>Paytm UPI</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="handlePaymentAuthorization(event, 'CRED Pay UPI')">
+                                    <i class="fa-solid fa-gem"></i>
+                                    <span>CRED Pay</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="handlePaymentAuthorization(event, 'BHIM UPI')">
+                                    <i class="fa-solid fa-bolt"></i>
+                                    <span>BHIM UPI</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="handlePaymentAuthorization(event, 'Amazon Pay UPI')">
+                                    <i class="fa-brands fa-amazon-pay"></i>
+                                    <span>Amazon Pay</span>
+                                </button>
+                            </div>
+
+                            <div class="upi-id-divider">OR ENTER YOUR UPI VPA ID</div>
+
+                            <form onsubmit="handlePaymentAuthorization(event, 'UPI VPA')">
+                                <div class="form-group" style="text-align: left;">
+                                    <label for="upiVpaInput"><i class="fa-solid fa-at"></i> Virtual Payment Address (UPI ID)</label>
+                                    <div class="upi-input-group">
+                                        <input type="text" id="upiVpaInput" placeholder="yourname@okaxis / mobile@upi" required>
+                                    </div>
+                                    <div class="upi-chips-row">
+                                        <button type="button" class="upi-chip" onclick="appendUpiSuffix('@okaxis')">@okaxis</button>
+                                        <button type="button" class="upi-chip" onclick="appendUpiSuffix('@okhdfcbank')">@okhdfcbank</button>
+                                        <button type="button" class="upi-chip" onclick="appendUpiSuffix('@ybl')">@ybl</button>
+                                        <button type="button" class="upi-chip" onclick="appendUpiSuffix('@paytm')">@paytm</button>
+                                        <button type="button" class="upi-chip" onclick="appendUpiSuffix('@icici')">@icici</button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-full pay-action-btn">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <span>Verify & Pay <span id="upiBtnAmount">₹0</span></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 2. RUPAY / CREDIT / DEBIT CARD PANEL -->
+                    <div class="pay-panel-content" id="panelCard" style="display: none;">
+                        <!-- Interactive Virtual Black Card -->
+                        <div class="virtual-card-wrapper">
+                            <div class="virtual-credit-card">
+                                <div class="vc-top">
+                                    <div class="vc-chip">
+                                        <div class="chip-line"></div>
+                                        <div class="chip-line"></div>
+                                        <div class="chip-line"></div>
+                                    </div>
+                                    <i class="fa-solid fa-wifi vc-contactless"></i>
+                                    <span class="vc-brand-logo">SAVORIA MAHARAJA</span>
+                                </div>
+
+                                <div class="vc-number" id="vcNumber">•••• •••• •••• ••••</div>
+
+                                <div class="vc-bottom">
+                                    <div class="vc-holder">
+                                        <span class="vc-lbl">CARDHOLDER NAME</span>
+                                        <span class="vc-val" id="vcHolder">MAHARAJA GUEST</span>
+                                    </div>
+                                    <div class="vc-expiry">
+                                        <span class="vc-lbl">EXPIRES</span>
+                                        <span class="vc-val" id="vcExpiry">MM/YY</span>
+                                    </div>
+                                    <div class="vc-network" id="vcNetworkIcon">
+                                        <span style="font-size: 1rem; font-weight: 800; color: var(--gold-primary);">RuPay</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Input Form -->
+                        <form id="cardPaymentForm" onsubmit="handleCardPaymentWithOtp(event)">
+                            <div class="form-group">
+                                <label for="cardHolderName"><i class="fa-regular fa-user"></i> Name on Card</label>
+                                <input type="text" id="cardHolderName" autocomplete="cc-name" placeholder="e.g. RAJNANDINI BHATI" required oninput="updateCardVisuals()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cardNumber"><i class="fa-regular fa-credit-card"></i> Card Number (RuPay, Visa, Mastercard, Amex)</label>
+                                <div class="card-input-with-icon">
+                                    <input type="text" id="cardNumber" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required oninput="handleCardNumberInput(this)">
+                                    <span class="card-type-indicator" id="cardTypeIndicator"><i class="fa-solid fa-shield"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="cardExpiry"><i class="fa-regular fa-calendar"></i> Expiry Date (MM/YY)</label>
+                                    <input type="text" id="cardExpiry" inputmode="numeric" maxlength="5" placeholder="MM/YY" autocomplete="cc-exp" required oninput="handleExpiryInput(this)">
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="label-with-action">
+                                        <label for="cardCvv"><i class="fa-solid fa-shield-halved"></i> Security Code (CVV)</label>
+                                        <span class="cvv-tooltip" title="3 or 4 digits printed on your card"><i class="fa-solid fa-circle-question"></i></span>
+                                    </div>
+                                    <input type="password" id="cardCvv" inputmode="numeric" maxlength="4" placeholder="•••" autocomplete="cc-csc" required oninput="updateCardVisuals()">
+                                </div>
+                            </div>
+
+                            <!-- Billing Address Option -->
+                            <div class="form-options-row">
+                                <label class="remember-me-label">
+                                    <input type="checkbox" id="saveCardCheck" checked>
+                                    <span>Save card securely for 1-Click checkout (RBI Tokenized)</span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full pay-action-btn" id="paySubmitBtn">
+                                <i class="fa-solid fa-lock"></i>
+                                <span>Authorize & Pay <span id="payBtnAmount">₹0</span></span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- 3. NET BANKING PANEL -->
+                    <div class="pay-panel-content" id="panelNetBanking" style="display: none;">
+                        <div class="netbanking-box">
+                            <h4 class="nb-title"><i class="fa-solid fa-building-columns"></i> Select Popular Bank</h4>
+                            <div class="nb-banks-grid">
+                                <button type="button" class="nb-bank-card selected" onclick="selectBank(this, 'HDFC Bank')">
+                                    <div class="nb-bank-icon hdfc">HDFC</div>
+                                    <span>HDFC Bank</span>
+                                </button>
+                                <button type="button" class="nb-bank-card" onclick="selectBank(this, 'ICICI Bank')">
+                                    <div class="nb-bank-icon icici">ICICI</div>
+                                    <span>ICICI Bank</span>
+                                </button>
+                                <button type="button" class="nb-bank-card" onclick="selectBank(this, 'State Bank of India')">
+                                    <div class="nb-bank-icon sbi">SBI</div>
+                                    <span>State Bank of India</span>
+                                </button>
+                                <button type="button" class="nb-bank-card" onclick="selectBank(this, 'Axis Bank')">
+                                    <div class="nb-bank-icon axis">AXIS</div>
+                                    <span>Axis Bank</span>
+                                </button>
+                                <button type="button" class="nb-bank-card" onclick="selectBank(this, 'Kotak Mahindra Bank')">
+                                    <div class="nb-bank-icon kotak">KOTAK</div>
+                                    <span>Kotak Bank</span>
+                                </button>
+                                <button type="button" class="nb-bank-card" onclick="selectBank(this, 'Punjab National Bank')">
+                                    <div class="nb-bank-icon pnb">PNB</div>
+                                    <span>PNB</span>
+                                </button>
+                            </div>
+
+                            <div class="nb-dropdown-group">
+                                <label for="allBanksSelect"><i class="fa-solid fa-landmark"></i> Or Choose from Other Banks (50+ Supported)</label>
+                                <select id="allBanksSelect" class="form-select" onchange="onOtherBankSelect(this.value)">
+                                    <option value="">-- Select Any Indian / Global Bank --</option>
+                                    <option value="Bank of Baroda">Bank of Baroda</option>
+                                    <option value="Canara Bank">Canara Bank</option>
+                                    <option value="Union Bank of India">Union Bank of India</option>
+                                    <option value="IndusInd Bank">IndusInd Bank</option>
+                                    <option value="IDFC FIRST Bank">IDFC FIRST Bank</option>
+                                    <option value="Yes Bank">Yes Bank</option>
+                                    <option value="Federal Bank">Federal Bank</option>
+                                    <option value="Standard Chartered">Standard Chartered India</option>
+                                    <option value="HSBC India">HSBC India</option>
+                                    <option value="Citibank">Citibank</option>
+                                    <option value="RBL Bank">RBL Bank</option>
+                                    <option value="Bank of India">Bank of India</option>
+                                    <option value="Indian Bank">Indian Bank</option>
+                                </select>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-full pay-action-btn" onclick="handleNetBankingPay(event)">
+                                <i class="fa-solid fa-lock"></i>
+                                <span>Proceed to <span id="nbSelectedBankName">HDFC Bank</span> Gateway (<span id="nbBtnAmount">₹0</span>)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 4. DIGITAL WALLETS PANEL -->
+                    <div class="pay-panel-content" id="panelWallets" style="display: none;">
+                        <div class="wallets-box">
+                            <h4 class="nb-title"><i class="fa-solid fa-wallet"></i> Choose Preferred Wallet</h4>
+                            <div class="wallets-list">
+                                <label class="wallet-option-row">
+                                    <input type="radio" name="walletChoice" value="Paytm Wallet" checked>
+                                    <div class="wallet-info">
+                                        <div class="wallet-icon-box"><i class="fa-solid fa-wallet"></i></div>
+                                        <div>
+                                            <strong>Paytm Wallet</strong>
+                                            <span>Link mobile & pay in 1 click</span>
+                                        </div>
+                                    </div>
+                                    <span class="wallet-balance-tag">Instant Link</span>
+                                </label>
+
+                                <label class="wallet-option-row">
+                                    <input type="radio" name="walletChoice" value="Amazon Pay Balance">
+                                    <div class="wallet-info">
+                                        <div class="wallet-icon-box"><i class="fa-brands fa-amazon-pay"></i></div>
+                                        <div>
+                                            <strong>Amazon Pay Balance</strong>
+                                            <span>Fast 1-tap debit</span>
+                                        </div>
+                                    </div>
+                                    <span class="wallet-balance-tag">Cashback eligible</span>
+                                </label>
+
+                                <label class="wallet-option-row">
+                                    <input type="radio" name="walletChoice" value="Mobikwik Zip / Wallet">
+                                    <div class="wallet-info">
+                                        <div class="wallet-icon-box"><i class="fa-solid fa-bolt"></i></div>
+                                        <div>
+                                            <strong>MobiKwik Wallet / ZIP</strong>
+                                            <span>SuperCash redemption enabled</span>
+                                        </div>
+                                    </div>
+                                    <span class="wallet-balance-tag">SuperCash</span>
+                                </label>
+
+                                <label class="wallet-option-row">
+                                    <input type="radio" name="walletChoice" value="PhonePe Wallet">
+                                    <div class="wallet-info">
+                                        <div class="wallet-icon-box"><i class="fa-solid fa-mobile-screen"></i></div>
+                                        <div>
+                                            <strong>PhonePe Wallet</strong>
+                                            <span>Instant wallet deduction</span>
+                                        </div>
+                                    </div>
+                                    <span class="wallet-balance-tag">Active</span>
+                                </label>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-full pay-action-btn" onclick="handleWalletPay(event)">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>Pay via Selected Wallet (<span id="walletBtnAmount">₹0</span>)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 5. PAY LATER & EMI PANEL -->
+                    <div class="pay-panel-content" id="panelPaylater" style="display: none;">
+                        <div class="paylater-box">
+                            <div class="bnpl-header">
+                                <span class="badge-award"><i class="fa-solid fa-sparkles"></i> 0% INTEREST / NO COST EMI</span>
+                                <h4>Buy Now, Pay Later & Flexi-EMI</h4>
+                                <p>Feast today and clear your dining statement at the end of the month or in easy split instalments.</p>
+                            </div>
+
+                            <div class="bnpl-grid">
+                                <label class="bnpl-card">
+                                    <input type="radio" name="bnplChoice" value="Simpl 1-Tap PayLater" checked>
+                                    <div class="bnpl-content">
+                                        <div class="bnpl-badge">1-TAP CHECKOUT</div>
+                                        <strong>Simpl PayLater</strong>
+                                        <p>Pay once in 15 days • No OTP • ₹0 extra fee</p>
+                                    </div>
+                                </label>
+
+                                <label class="bnpl-card">
+                                    <input type="radio" name="bnplChoice" value="LazyPay by PayU">
+                                    <div class="bnpl-content">
+                                        <div class="bnpl-badge">INSTANT CREDIT</div>
+                                        <strong>LazyPay by PayU</strong>
+                                        <p>Pay next month • Instant digital approval</p>
+                                    </div>
+                                </label>
+
+                                <label class="bnpl-card">
+                                    <input type="radio" name="bnplChoice" value="ICICI / Amazon Pay Later">
+                                    <div class="bnpl-content">
+                                        <div class="bnpl-badge">PRE-APPROVED</div>
+                                        <strong>ICICI / Amazon Pay Later</strong>
+                                        <p>Pre-approved credit line up to ₹1,00,000</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="emi-breakdown-box">
+                                <h5><i class="fa-solid fa-calculator"></i> No-Cost Credit Card EMI Options:</h5>
+                                <div class="emi-options-list" id="emiOptionsList">
+                                    <!-- Injected via app.js with dynamic monthly price -->
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-full pay-action-btn" onclick="handlePayLaterSubmit(event)">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>Authorize Pay Later (<span id="paylaterBtnAmount">₹0</span>)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 6. CASH / PAY ON DELIVERY (COD) PANEL -->
+                    <div class="pay-panel-content" id="panelCod" style="display: none;">
+                        <div class="cod-box">
+                            <div class="cod-header-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                            <h3>Pay on Delivery / Table Settlement</h3>
+                            <p>Settle with the royal chauffeur or dining butler upon arrival. All modes supported at doorstep.</p>
+
+                            <div class="cod-modes-grid">
+                                <label class="cod-mode-card selected" onclick="selectCodSubMode(this, 'Cash at Doorstep')">
+                                    <input type="radio" name="codModeChoice" value="Cash at Doorstep" checked>
+                                    <i class="fa-solid fa-money-bill-wave"></i>
+                                    <strong>Cash Payment</strong>
+                                    <span>Exact cash or change required</span>
+                                </label>
+
+                                <label class="cod-mode-card" onclick="selectCodSubMode(this, 'Card Swipe at Doorstep')">
+                                    <input type="radio" name="codModeChoice" value="Card Swipe at Doorstep">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                    <strong>Chauffeur Card POS</strong>
+                                    <span>Wireless card swipe machine</span>
+                                </label>
+
+                                <label class="cod-mode-card" onclick="selectCodSubMode(this, 'UPI QR on Arrival')">
+                                    <input type="radio" name="codModeChoice" value="UPI QR on Arrival">
+                                    <i class="fa-solid fa-qrcode"></i>
+                                    <strong>UPI on Arrival</strong>
+                                    <span>Scan butler's live QR at delivery</span>
+                                </label>
+                            </div>
+
+                            <div class="cod-change-note">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Our white-glove chauffeur will carry a sanitized digital bill and POS terminal.</span>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-full pay-action-btn" onclick="handleCodSubmit(event)">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Confirm Royal Order & Pay on Delivery (<span id="codBtnAmount">₹0</span>)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 7. SAVORIA MAHARAJA HOUSE ACCOUNT PANEL -->
+                    <div class="pay-panel-content" id="panelHouseAccount" style="display: none;">
+                        <div class="house-account-box">
+                            <div class="house-badge">
+                                <i class="fa-solid fa-crown"></i>
+                                <span>MAHARAJA ELITE CLUB BILLING</span>
+                            </div>
+                            <h3>SAVORIA Royal House Account</h3>
+                            <p>Charge this transaction directly to your royal membership statement on file.</p>
+
+                            <div class="house-account-status">
+                                <div class="ha-row">
+                                    <span>Account Holder:</span>
+                                    <strong id="haMemberName">Royal Patron</strong>
+                                </div>
+                                <div class="ha-row">
+                                    <span>Member Tier:</span>
+                                    <span class="text-gold">Maharaja Imperial Connoisseur</span>
+                                </div>
+                                <div class="ha-row">
+                                    <span>Statement Settlement:</span>
+                                    <span>Monthly Consolidated E-Invoice</span>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-full pay-action-btn" onclick="handlePaymentAuthorization(event, 'SAVORIA Royal House Account')">
+                                <i class="fa-solid fa-crown"></i>
+                                <span>Charge to House Account (<span id="haBtnAmount">₹0</span>)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Official Razorpay Direct Modal Trigger Strip -->
+                    <div class="razorpay-direct-bar">
+                        <div class="rzp-bar-info">
+                            <i class="fa-solid fa-bolt text-gold"></i>
+                            <div>
+                                <strong>Official Razorpay Live Gateway</strong>
+                                <span>Prefer the official Razorpay multi-payment popup modal?</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="launchRazorpayLiveGateway(event)">
+                            <i class="fa-solid fa-up-right-from-square"></i> Open Razorpay Modal
+                        </button>
+                    </div>
+
+                    <!-- Security & Trust Badges Strip -->
+                    <div class="payment-trust-badges">
+                        <div class="trust-badge-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <div>
+                                <strong>256-Bit Bank Grade</strong>
+                                <span>RBI & NPCI compliant</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <div>
+                                <strong>Instant UPI OTP</strong>
+                                <span>Secure two-factor auth</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge-item">
+                            <i class="fa-solid fa-lock"></i>
+                            <div>
+                                <strong>Fraud Protection</strong>
+                                <span>Instant encrypted vault</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Order Financial Summary & Details -->
+                <div class="payment-summary-column">
+                    <div class="payment-summary-card">
+                        <div class="pay-summary-header">
+                            <h3>Royal Order Summary</h3>
+                            <a href="tray.html" class="edit-tray-link"><i class="fa-solid fa-pen-to-square"></i> Edit Tray</a>
+                        </div>
+
+                        <!-- Guest & Fulfillment Info -->
+                        <div class="pay-fulfillment-strip">
+                            <div class="pf-item">
+                                <span class="pf-label">Guest:</span>
+                                <strong id="paySummaryGuest">Royal Guest</strong>
+                            </div>
+                            <div class="pf-item">
+                                <span class="pf-label">Fulfillment:</span>
+                                <span id="paySummaryFulfill">Royal White-Glove Chauffeur Delivery</span>
+                            </div>
+                            <div class="pf-item">
+                                <span class="pf-label">Timing:</span>
+                                <span id="paySummaryTiming">As soon as prepared (~35 min)</span>
+                            </div>
+                        </div>
+
+                        <!-- Items List Preview -->
+                        <div class="pay-items-list-wrapper" id="paySummaryItemsList">
+                            <!-- Injected via app.js -->
+                        </div>
+
+                        <!-- Price Breakdown Ledger -->
+                        <div class="pay-totals-ledger">
+                            <div class="ledger-row">
+                                <span>Subtotal:</span>
+                                <span id="paySubtotal">₹0</span>
+                            </div>
+                            <div class="ledger-row">
+                                <span>Indian Restaurant GST (5%):</span>
+                                <span id="payTax">₹0</span>
+                            </div>
+                            <div class="ledger-row">
+                                <span>Brigade Staff Gratuity:</span>
+                                <span id="payTip">₹0</span>
+                            </div>
+                            <div class="ledger-row grand-total-row">
+                                <span>Total Amount Payable:</span>
+                                <span class="text-gold" id="payGrandTotal">₹0</span>
+                            </div>
+                        </div>
+
+                        <div class="pay-guarantee-box">
+                            <i class="fa-solid fa-certificate"></i>
+                            <p>100% Royal Heritage & Sourcing Guarantee backed by Master Ustad Auguste Moreau.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payment Processing Overlay Modal -->
+    <div class="pay-processing-overlay" id="payProcessingOverlay" aria-hidden="true">
+        <div class="processing-modal-card">
+            <div class="proc-spinner-circle">
+                <div class="proc-spinner"></div>
+                <i class="fa-solid fa-lock proc-lock-icon"></i>
+            </div>
+            <h3 id="procStatusTitle">Securing Transaction</h3>
+            <p id="procStatusSub">Connecting to banking network with 256-bit TLS encryption...</p>
+            <div class="proc-progress-bar">
+                <div class="proc-progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D Secure / Bank OTP Verification Modal -->
+    <div class="modal-backdrop" id="bankOtpModal" aria-hidden="true">
+        <div class="modal-dialog otp-modal-dialog">
+            <div class="bank-otp-card">
+                <div class="bank-otp-header">
+                    <div class="bank-logo-shield">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h4 id="otpBankTitle">RBI 3D Secure Bank Authentication</h4>
+                        <span class="otp-sub-text">Verified by RuPay / Visa Secure / Mastercard Identity Check</span>
+                    </div>
+                </div>
+
+                <div class="bank-otp-body">
+                    <p class="otp-prompt-msg">An authentication OTP has been dispatched to your registered mobile number ending in <strong id="otpMaskedPhone">•••• ••287</strong></p>
+
+                    <div class="otp-summary-mini">
+                        <div class="osm-row"><span>Merchant:</span><strong>SAVORIA Fine Dining</strong></div>
+                        <div class="osm-row"><span>Amount:</span><strong class="text-gold" id="otpAmountVal">₹0</strong></div>
+                        <div class="osm-row"><span>Ref Code:</span><span id="otpRefCode">SAV-TXN-9842</span></div>
+                    </div>
+
+                    <div class="otp-inputs-row">
+                        <input type="text" maxlength="1" class="otp-digit-box" autofocus inputmode="numeric" oninput="handleOtpBoxInput(this, 1)">
+                        <input type="text" maxlength="1" class="otp-digit-box" inputmode="numeric" oninput="handleOtpBoxInput(this, 2)">
+                        <input type="text" maxlength="1" class="otp-digit-box" inputmode="numeric" oninput="handleOtpBoxInput(this, 3)">
+                        <input type="text" maxlength="1" class="otp-digit-box" inputmode="numeric" oninput="handleOtpBoxInput(this, 4)">
+                        <input type="text" maxlength="1" class="otp-digit-box" inputmode="numeric" oninput="handleOtpBoxInput(this, 5)">
+                        <input type="text" maxlength="1" class="otp-digit-box" inputmode="numeric" oninput="handleOtpBoxInput(this, 6)">
+                    </div>
+
+                    <div class="otp-timer-row">
+                        <span>Resend OTP in <strong id="otpTimerText">00:45</strong></span>
+                        <button type="button" class="btn-resend-otp" id="btnResendOtp" onclick="resendOtpCode()" disabled>Resend Code</button>
+                    </div>
+
+                    <div class="otp-actions-group">
+                        <button type="button" class="btn btn-primary btn-full" onclick="submitBankOtp()">
+                            <i class="fa-solid fa-lock"></i> Authorize & Confirm Payment
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-full btn-sm" onclick="cancelBankOtp()">
+                            Cancel Transaction
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 SAVORIA Haute Cuisine Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="index.html">Back to Main Website</a>
+                    <span>•</span>
+                    <a href="tray.html">Back to Tray</a>
+                    <span>•</span>
+                    <a href="kitchen-orders.html" target="_blank"><i class="fa-solid fa-lock"></i> Staff / Kitchen Line</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script src="app.js?v=3.0"></script>
+</body>
+</html>

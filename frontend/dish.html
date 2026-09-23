@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Dish Details — SAVORIA Fine Dining</title>
+    <meta name="description" content="Explore artisanal ingredients, chef's tasting notes, and sommelier pairings for this signature creation at SAVORIA.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dish-page-body">
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span class="badge-award"><i class="fa-solid fa-star"></i> MICHELIN Guide 2026 Selection</span>
+            <div class="top-bar-links">
+                <span id="liveStatusBadge" class="live-status"><span class="pulse-dot"></span> Open Today: 6:30 PM – Midnight</span>
+                <a href="tel:+91XXXXXXXXXX" class="top-phone"><i class="fa-solid fa-phone"></i> +91 XXXXX XXXXX</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="header" id="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-symbol">❖</span>
+                <div class="logo-text-group">
+                    <span class="logo-text">SAVORIA</span>
+                    <span class="logo-sub">ROYAL INDIAN DINING</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="nav-link active">Imperial Menu</a></li>
+                <li><a href="index.html#experience" class="nav-link">The Experience</a></li>
+                <li><a href="index.html#reservations" class="nav-link">Reservations</a></li>
+                <li><a href="index.html#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Cart Trigger Pill -->
+                <a href="tray.html" class="cart-pill-btn" id="cartTriggerBtn" aria-label="View Dining Order Tray">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-pill-text">Order Tray</span>
+                    <span class="cart-badge" id="cartCountBadge">0</span>
+                </a>
+
+                <!-- User Account Dynamic Container -->
+                <div class="user-auth-nav-slot" id="userAuthNavSlot"></div>
+
+                <a href="index.html#reservations" class="btn btn-primary btn-sm nav-reserve-btn">
+                    <span>Reserve a Table</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-content">
+            <ul class="mobile-links">
+                <li><a href="index.html#hero" class="mobile-link">Home</a></li>
+                <li><a href="index.html#about" class="mobile-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="mobile-link">Imperial Menu</a></li>
+                <li><a href="tray.html" class="mobile-link">Order Tray</a></li>
+                <li><a href="auth.html" class="mobile-link">Member Portal / Sign In</a></li>
+                <li><a href="index.html#experience" class="mobile-link">The Experience</a></li>
+                <li><a href="index.html#reservations" class="mobile-link">Reservations</a></li>
+                <li><a href="index.html#testimonials" class="mobile-link">Reviews</a></li>
+                <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+            </ul>
+            <div class="mobile-drawer-footer">
+                <a href="index.html#reservations" class="btn btn-primary btn-full mobile-drawer-btn">Book Your Table</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="dish-detail-main">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <nav class="dish-breadcrumbs" aria-label="Breadcrumbs">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <span>/</span>
+                <a href="index.html#menu">Imperial Menu</a>
+                <span>/</span>
+                <span id="breadcrumbDishName" class="active-crumb">Dish Details</span>
+            </nav>
+
+            <!-- Dish Detail Grid -->
+            <div class="dish-detail-container" id="dishDetailContainer">
+                <!-- Populated dynamically via app.js -->
+                <div class="dish-loading-state">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>Preparing culinary presentation...</p>
+                </div>
+            </div>
+
+            <!-- Related / Chef Recommended Dishes -->
+            <section class="related-dishes-section">
+                <div class="section-header">
+                    <span class="section-tag">COMPLEMENTARY SELECTIONS</span>
+                    <h2 class="section-title">You May Also Savor</h2>
+                </div>
+                <div class="menu-grid" id="relatedDishesGrid">
+                    <!-- Injected dynamically -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Slide-Out Cart Drawer -->
+    <div class="cart-drawer-backdrop" id="cartDrawerBackdrop">
+        <aside class="cart-drawer" id="cartDrawer" aria-label="Dining Cart Drawer">
+            <div class="cart-drawer-header">
+                <div class="cart-header-title">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <h3>Your Artisanal Order</h3>
+                </div>
+                <button class="cart-close-btn" id="closeCartBtn" aria-label="Close Cart">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="cart-items-list" id="cartItemsContainer">
+                <!-- Injected via app.js -->
+            </div>
+
+            <div class="cart-drawer-footer" id="cartFooter">
+                <!-- Tip Selector -->
+                <div class="cart-tip-section">
+                    <span class="cart-tip-label">Hospitality Gratuity:</span>
+                    <div class="cart-tip-buttons" id="tipButtons">
+                        <button class="tip-btn" data-tip="10">10%</button>
+                        <button class="tip-btn active" data-tip="12">12%</button>
+                        <button class="tip-btn" data-tip="15">15%</button>
+                        <button class="tip-btn" data-tip="0">Custom/0%</button>
+                    </div>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="cart-summary-breakdown">
+                    <div class="cart-sum-row">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal">₹0</span>
+                    </div>
+                    <div class="cart-sum-row">
+                        <span>Indian Restaurant GST (5%):</span>
+                        <span id="cartTax">₹0</span>
+                    </div>
+                    <div class="cart-sum-row">
+                        <span>Staff Gratuity:</span>
+                        <span id="cartTipAmount">₹0</span>
+                    </div>
+                    <div class="cart-sum-row cart-total-row">
+                        <span>Estimated Total:</span>
+                        <span id="cartTotal" class="text-gold">₹0</span>
+                    </div>
+                </div>
+
+                <a href="tray.html" class="btn btn-primary btn-full checkout-trigger-btn" id="proceedCheckoutBtn">
+                    <span>Proceed to Order Tray</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Takeout / Delivery Checkout Modal -->
+    <div class="modal-backdrop" id="checkoutModal" aria-hidden="true">
+        <div class="modal-dialog checkout-modal-dialog">
+            <button class="modal-close-btn" id="closeCheckoutModalBtn" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="checkout-modal-content">
+                <div class="checkout-header">
+                    <span class="section-tag">SAVORIA ROYAL SERVICE</span>
+                    <h3>Complete Your Culinary Order</h3>
+                    <p>Select royal chauffeur delivery or private valet pickup from 450 Heritage Marg</p>
+                </div>
+
+                <form id="checkoutForm" class="checkout-form">
+                    <div class="order-type-toggle">
+                        <label class="order-type-option active">
+                            <input type="radio" name="orderType" value="pickup" checked>
+                            <i class="fa-solid fa-store"></i>
+                            <span>Valet Pickup (30-40 min)</span>
+                        </label>
+                        <label class="order-type-option">
+                            <input type="radio" name="orderType" value="delivery">
+                            <i class="fa-solid fa-motorcycle"></i>
+                            <span>Royal Chauffeur Delivery</span>
+                        </label>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="coName">Full Name</label>
+                            <input type="text" id="coName" autocomplete="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="coPhone">Phone Number</label>
+                            <input type="tel" id="coPhone" autocomplete="tel" required>
+                        </div>
+                        <div class="form-group full-width" id="deliveryAddressGroup" style="display: none;">
+                            <label for="coAddress">Delivery Street Address (Delhi NCR / Lutyens' Zone)</label>
+                            <input type="text" id="coAddress" placeholder="Bungalow / Apartment, Street, City, PIN">
+                        </div>
+                        <div class="form-group">
+                            <label for="coTime">Pickup / Delivery Time</label>
+                            <select id="coTime">
+                                <option value="asap">As soon as prepared (~35 min)</option>
+                                <option value="19:00">Tonight at 7:00 PM</option>
+                                <option value="20:00">Tonight at 8:00 PM</option>
+                                <option value="21:00">Tonight at 9:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="coPayment">Payment Method</label>
+                            <select id="coPayment">
+                                <option value="upi">UPI / Instant QR Pay</option>
+                                <option value="card">RuPay / Credit Card on File</option>
+                                <option value="concierge">Maharaja House Account</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="checkout-order-summary-box" id="checkoutOrderSummaryBox"></div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Authorize & Place Order</span>
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 SAVORIA Haute Cuisine India Pvt. Ltd. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="index.html">Back to Main Website</a>
+                    <span>•</span>
+                    <a href="index.html#reservations">Reserve Table</a>
+                    <span>•</span>
+                    <a href="kitchen-orders.html" target="_blank" title="Internal Kitchen Staff Portal"><i class="fa-solid fa-lock"></i> Staff / Kitchen Line</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App Logic -->
+    <script src="app.js?v=3.0"></script>
+    <script>
+        if (typeof initDishPage === 'function') {
+            initDishPage();
+        }
+    </script>
+</body>
+</html>

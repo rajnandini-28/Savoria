@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAVORIA — Imperial Admin & Concierge Command Center</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css?v=3.5">
+
+    <style>
+        body {
+            background-color: #08080c;
+            color: #e2dfd2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            width: 260px;
+            background: #0f0f17;
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            box-sizing: border-box;
+        }
+
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 8px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+        }
+
+        .admin-nav {
+            list-style: none;
+            padding: 20px 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #a19da8;
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-left: 3px solid transparent;
+            user-select: none;
+        }
+
+        .admin-nav-item:hover {
+            color: #ffffff;
+            background: rgba(230, 185, 128, 0.08);
+            border-left: 3px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .admin-nav-item.active {
+            color: #e6b980;
+            background: rgba(230, 185, 128, 0.15);
+            border-left: 3px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-nav-item i {
+            font-size: 1.15rem;
+            width: 22px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .admin-main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 30px;
+            max-width: calc(100% - 260px);
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .admin-title-group h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .admin-title-group p {
+            color: #8f8b99;
+            margin: 4px 0 0;
+            font-size: 0.85rem;
+        }
+
+        .admin-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Metrics Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: #13131c;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.5);
+            background: #171724;
+        }
+
+        .metric-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .metric-gold { background: rgba(230, 185, 128, 0.15); color: #e6b980; }
+        .metric-green { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+        .metric-blue { background: rgba(52, 152, 219, 0.15); color: #3498db; }
+        .metric-red { background: rgba(231, 76, 60, 0.15); color: #e74c3c; }
+        .metric-purple { background: rgba(155, 89, 182, 0.15); color: #9b59b6; }
+
+        .metric-info .m-label {
+            font-size: 0.76rem;
+            color: #8f8b99;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .metric-info .m-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        /* Section Cards */
+        .admin-section {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .admin-card {
+            background: #111119;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .admin-card-header {
+            padding: 18px 24px;
+            background: #161622;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .admin-card-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background: #13131d;
+            color: #8f8b99;
+            padding: 14px 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.74rem;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            white-space: nowrap;
+        }
+
+        .admin-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #ded8cb;
+            vertical-align: middle;
+        }
+
+        .admin-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-confirmed { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+        .status-seated { background: rgba(52, 152, 219, 0.15); color: #3498db; border: 1px solid rgba(52, 152, 219, 0.3); }
+        .status-completed { background: rgba(155, 89, 182, 0.15); color: #9b59b6; border: 1px solid rgba(155, 89, 182, 0.3); }
+        .status-cancelled { background: rgba(231, 76, 60, 0.15); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
+
+        .btn-action {
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #1a1a26;
+            color: #e2dfd2;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action:hover {
+            background: #d4af37;
+            color: #0c0c12;
+            border-color: #d4af37;
+        }
+
+        /* Review Card Grid */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 24px;
+        }
+
+        .review-card-item {
+            background: #151522;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+
+        .review-card-item:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .review-stars {
+            color: #d4af37;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 3px;
+        }
+
+        /* Auth Gate Overlay */
+        .admin-gate-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 12, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gate-card {
+            background: #13131c;
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .gate-input {
+            width: 100%;
+            background: #09090e;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 1rem;
+            margin: 20px 0;
+            box-sizing: border-box;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .gate-input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 992px) {
+            .admin-sidebar { width: 70px; padding: 15px 8px; }
+            .admin-sidebar .admin-nav-item span, .admin-sidebar .admin-brand div { display: none; }
+            .admin-main { margin-left: 70px; max-width: calc(100% - 70px); padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Security Gate Modal (PIN: 2026 / password) -->
+    <div class="admin-gate-overlay" id="adminGate">
+        <div class="gate-card">
+            <span style="font-size: 2.2rem; color: #d4af37;">⚜️</span>
+            <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 10px 0 4px;">SAVORIA Owner Portal</h2>
+            <p style="color: #8f8b99; font-size: 0.85rem;">Authorized Access for Rajnandini Bhati (mkd9a32@gmail.com)</p>
+            
+            <form id="gateForm" onsubmit="handleGateUnlock(event)">
+                <input type="password" id="gatePass" class="gate-input" placeholder="Enter Owner PIN (2026)" required autofocus>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span>Access Executive Control Desk</span>
+                    <i class="fa-solid fa-key"></i>
+                </button>
+            </form>
+            <p style="margin-top: 15px; font-size: 0.78rem; color: #6f6b78;">Default PIN: <code style="color: #e6b980;">2026</code></p>
+        </div>
+    </div>
+
+    <div class="admin-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="admin-sidebar">
+            <div>
+                <a href="index.html" class="admin-brand">
+                    <span style="font-size: 1.5rem; color: #d4af37;">❖</span>
+                    <div>
+                        <strong style="font-family: 'Cinzel', serif; color: #fff; display: block; font-size: 1.1rem; letter-spacing: 2px;">SAVORIA</strong>
+                        <span style="font-size: 0.65rem; color: #d4af37; letter-spacing: 1px;">OWNER DESK</span>
+                    </div>
+                </a>
+
+                <ul class="admin-nav" id="sidebarNav">
+                    <li><a class="admin-nav-item active" data-tab="overview" onclick="switchTab('overview')"><i class="fa-solid fa-chart-pie"></i> <span>Overview</span></a></li>
+                    <li><a class="admin-nav-item" data-tab="reservations" onclick="switchTab('reservations')"><i class="fa-solid fa-calendar-check"></i> <span>Reservations</span></a></li>
+                    <li><a class="admin-nav-item" data-tab="orders" onclick="switchTab('orders')"><i class="fa-solid fa-fire-burner"></i> <span>Kitchen Orders</span></a></li>
+                    <li><a class="admin-nav-item" data-tab="inquiries" onclick="switchTab('inquiries')"><i class="fa-solid fa-envelope-open-text"></i> <span>Guest Inquiries</span></a></li>
+                    <li><a class="admin-nav-item" data-tab="reviews" onclick="switchTab('reviews')"><i class="fa-solid fa-star"></i> <span>Reviews</span></a></li>
+                </ul>
+            </div>
+
+            <div>
+                <a href="index.html" class="admin-nav-item" style="color: #e74c3c;"><i class="fa-solid fa-arrow-left"></i> <span>Back to Website</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="admin-title-group">
+                    <h1 id="tabTitle">Executive Overview</h1>
+                    <p id="tabSubtitle">Real-time gastronomy management and reservation control desk</p>
+                </div>
+                <div class="admin-controls">
+                    <button class="btn btn-secondary btn-sm" onclick="fetchAdminData()"><i class="fa-solid fa-rotate"></i> Sync Live Data</button>
+                    <a href="kitchen-orders.html" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-kitchen-set"></i> Kitchen KDS Line</a>
+                </div>
+            </header>
+
+            <!-- Metrics KPI Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card" onclick="switchTab('reservations')">
+                    <div class="metric-icon-box metric-gold"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div class="metric-info">
+                        <div class="m-label">Total Reservations</div>
+                        <div class="m-value" id="kpiReservations">0</div>
+                    </div>
+                </div>
+
+                <div class="metric-card" onclick="switchTab('orders')">
+                    <div class="metric-icon-box metric-green"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                    <div class="metric-info">
+                        <div class="m-label">Gross Revenue</div>
+                        <div class="m-value" id="kpiRevenue">₹0</div>
+                    </div>
+                </div>
+
+                <div class="metric-card" onclick="switchTab('orders')">
+                    <div class="metric-icon-box metric-blue"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="metric-info">
+                        <div class="m-label">Active Orders</div>
+                        <div class="m-value" id="kpiOrders">0</div>
+                    </div>
+                </div>
+
+                <div class="metric-card" onclick="switchTab('inquiries')">
+                    <div class="metric-icon-box metric-red"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="metric-info">
+                        <div class="m-label">Guest Inquiries</div>
+                        <div class="m-value" id="kpiInquiries">0</div>
+                    </div>
+                </div>
+
+                <div class="metric-card" onclick="switchTab('reviews')">
+                    <div class="metric-icon-box metric-purple"><i class="fa-solid fa-star"></i></div>
+                    <div class="metric-info">
+                        <div class="m-label">Patron Reviews</div>
+                        <div class="m-value" id="kpiReviews">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 1: Reservations Manager Section -->
+            <div id="sectionReservations" class="admin-section admin-card">
+                <div class="admin-card-header">
+                    <h3><i class="fa-solid fa-table-list" style="color: #d4af37;"></i> Live Table Reservations</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="resFilterInput" onkeyup="filterTable('resTable', this.value)" placeholder="Search guest name or ref..." style="background: #09090e; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; color: #fff; font-size: 0.8rem;">
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="resTable">
+                        <thead>
+                            <tr>
+                                <th>Ref Code</th>
+                                <th>Guest Name</th>
+                                <th>Party</th>
+                                <th>Date & Time</th>
+                                <th>Court Seating</th>
+                                <th>Contact Details</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservationsTableBody">
+                            <tr><td colspan="8" style="text-align:center; padding: 30px; color: #7f7a8c;">Loading reservations...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 2: Guest Inquiries Section -->
+            <div id="sectionInquiries" class="admin-section admin-card">
+                <div class="admin-card-header">
+                    <h3><i class="fa-solid fa-comments" style="color: #3498db;"></i> Concierge Inquiries (Received at mkd9a32@gmail.com)</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="inqFilterInput" onkeyup="filterTable('inqTable', this.value)" placeholder="Search inquiries..." style="background: #09090e; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; color: #fff; font-size: 0.8rem;">
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="inqTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Guest Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Topic</th>
+                                <th>Message</th>
+                                <th>Quick Connect</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiriesTableBody">
+                            <tr><td colspan="7" style="text-align:center; padding: 30px; color: #7f7a8c;">Loading guest inquiries...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 3: Kitchen Orders Tracker Section -->
+            <div id="sectionOrders" class="admin-section admin-card">
+                <div class="admin-card-header">
+                    <h3><i class="fa-solid fa-fire" style="color: #e67e22;"></i> Real-Time Kitchen Orders</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="ordFilterInput" onkeyup="filterTable('ordersTable', this.value)" placeholder="Search order ID or patron..." style="background: #09090e; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; color: #fff; font-size: 0.8rem;">
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="ordersTable">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Patron</th>
+                                <th>Type / Table</th>
+                                <th>Dishes</th>
+                                <th>Total Bill</th>
+                                <th>Station</th>
+                                <th>Kitchen Status</th>
+                                <th>Update</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <tr><td colspan="8" style="text-align:center; padding: 30px; color: #7f7a8c;">Loading kitchen orders...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 4: Reviews & Testimonials Section -->
+            <div id="sectionReviews" class="admin-section admin-card">
+                <div class="admin-card-header">
+                    <h3><i class="fa-solid fa-star" style="color: #9b59b6;"></i> Patron Reviews & Gastronomy Ratings</h3>
+                    <div style="font-size: 0.85rem; color: #e6b980;">
+                        <i class="fa-solid fa-award"></i> 5.0 Michelin-Grade Diner Feedback
+                    </div>
+                </div>
+                <div class="reviews-grid" id="reviewsContainer">
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: #7f7a8c;">Loading diner reviews...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script Logic -->
+    <script>
+        let adminData = { reservations: [], orders: [], contacts: [], reviews: [] };
+        let currentTab = 'overview';
+
+        function handleGateUnlock(e) {
+            e.preventDefault();
+            const pass = document.getElementById('gatePass').value;
+            if (pass === '2026' || pass === 'admin' || pass === 'maharaja2026') {
+                document.getElementById('adminGate').style.display = 'none';
+                sessionStorage.setItem('savoria_admin_auth', 'true');
+                fetchAdminData();
+            } else {
+                alert('Invalid Owner PIN. Please enter 2026.');
+            }
+        }
+
+        // Auto unlock if session exists
+        if (sessionStorage.getItem('savoria_admin_auth') === 'true') {
+            document.getElementById('adminGate').style.display = 'none';
+        }
+
+        async function fetchAdminData() {
+            try {
+                const [resRes, ordRes, inqRes, revRes] = await Promise.all([
+                    fetch('/api/reservations').then(r => r.json()).catch(() => ({ data: [] })),
+                    fetch('/api/orders').then(r => r.json()).catch(() => ({ data: [] })),
+                    fetch('/api/contact').then(r => r.json()).catch(() => ({ data: [] })),
+                    fetch('/api/reviews').then(r => r.json()).catch(() => ({ data: [] }))
+                ]);
+
+                adminData.reservations = resRes.data || resRes.reservations || [];
+                adminData.orders = ordRes.data || ordRes.orders || [];
+                adminData.contacts = inqRes.data || [];
+                adminData.reviews = revRes.data || revRes.reviews || [];
+
+                renderKPIs();
+                renderReservationsTable();
+                renderInquiriesTable();
+                renderOrdersTable();
+                renderReviewsGrid();
+            } catch (err) {
+                console.error('Error fetching admin data:', err);
+            }
+        }
+
+        function renderKPIs() {
+            document.getElementById('kpiReservations').textContent = adminData.reservations.length;
+            document.getElementById('kpiInquiries').textContent = adminData.contacts.length;
+            document.getElementById('kpiReviews').textContent = adminData.reviews.length;
+            
+            const activeOrders = adminData.orders.filter(o => o.status !== 'Fulfilled');
+            document.getElementById('kpiOrders').textContent = activeOrders.length;
+
+            const totalRev = adminData.orders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+            document.getElementById('kpiRevenue').textContent = '₹' + Math.round(totalRev).toLocaleString('en-IN');
+        }
+
+        function renderReservationsTable() {
+            const tbody = document.getElementById('reservationsTableBody');
+            if (!adminData.reservations.length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color:#888;">No reservations recorded yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = adminData.reservations.map(r => `
+                <tr>
+                    <td><strong style="color: #f1c40f; font-family: monospace;">${r.bookingRef || r.id}</strong></td>
+                    <td><strong>${r.fullName || 'Royal Patron'}</strong></td>
+                    <td>${r.guestsText || (r.guests ? r.guests + ' Guests' : '2 Guests')}</td>
+                    <td>${r.formattedDate || r.date || 'Today'} <br><span style="color:#8f8b99; font-size:0.75rem;">${r.timeText || r.time || '8:00 PM'}</span></td>
+                    <td>${r.seating || 'Durbar Hall'}</td>
+                    <td>
+                        <a href="tel:${r.phone || '+919982072287'}" style="color: #3498db; text-decoration:none;"><i class="fa-solid fa-phone"></i> ${r.phone || '+91 99820 72287'}</a><br>
+                        <a href="mailto:${r.email || 'mkd9a32@gmail.com'}" style="color: #8f8b99; font-size:0.75rem; text-decoration:none;">${r.email || 'mkd9a32@gmail.com'}</a>
+                    </td>
+                    <td><span class="status-badge status-${(r.status || 'confirmed').toLowerCase()}">${r.status || 'Confirmed'}</span></td>
+                    <td>
+                        <select onchange="updateResStatus('${r.bookingRef || r._id || r.id}', this.value)" style="background:#09090e; border:1px solid #d4af37; color:#fff; border-radius:4px; padding:4px;">
+                            <option value="">Update Status...</option>
+                            <option value="seated">Mark Seated</option>
+                            <option value="completed">Mark Completed</option>
+                            <option value="cancelled">Cancel Table</option>
+                        </select>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderInquiriesTable() {
+            const tbody = document.getElementById('inquiriesTableBody');
+            if (!adminData.contacts.length) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color:#888;">No inquiries received yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = adminData.contacts.map(c => {
+                const phoneNum = (c.phone || '9982072287').replace(/[^0-9]/g, '');
+                return `
+                <tr>
+                    <td style="color:#8f8b99; font-size:0.75rem;">${new Date(c.createdAt || Date.now()).toLocaleDateString('en-IN')}</td>
+                    <td><strong>${c.name}</strong></td>
+                    <td><a href="mailto:${c.email}" style="color:#68b0f8; text-decoration:none;">${c.email}</a></td>
+                    <td><a href="tel:${c.phone || '+919982072287'}" style="color:#2ecc71; text-decoration:none;">${c.phone || '+91 99820 72287'}</a></td>
+                    <td><span style="color:#e6b980; font-weight:600;">${c.subject || 'General'}</span></td>
+                    <td style="max-width:280px; font-size:0.82rem; color:#ded8cb;">${c.message}</td>
+                    <td>
+                        <a href="https://wa.me/${phoneNum.length === 10 ? '91' + phoneNum : phoneNum}?text=Namaste%20${encodeURIComponent(c.name)},%20thank%20you%20for%20contacting%20SAVORIA." target="_blank" class="btn-action" style="color:#2ecc71;">
+                            <i class="fa-brands fa-whatsapp"></i> Reply
+                        </a>
+                    </td>
+                </tr>
+                `;
+            }).join('');
+        }
+
+        function renderOrdersTable() {
+            const tbody = document.getElementById('ordersTableBody');
+            if (!adminData.orders.length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color:#888;">No kitchen orders found.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = adminData.orders.map(o => {
+                const dishList = (o.items || []).map(i => `${i.quantity || i.qty || 1}x ${i.title || i.name}`).join(', ');
+                return `
+                <tr>
+                    <td><strong style="color:#e6b980; font-family:monospace;">${o.orderId || o.id}</strong></td>
+                    <td>${o.customerName || 'Patron'}</td>
+                    <td>${o.orderType || 'Dine-In'}<br><span style="color:#8f8b99; font-size:0.75rem;">${o.tableNumber || 'Table T-01'}</span></td>
+                    <td style="max-width:250px; font-size:0.8rem;">${dishList}</td>
+                    <td><strong>₹${Math.round(o.total || 0).toLocaleString('en-IN')}</strong></td>
+                    <td><span style="font-size:0.75rem; color:#8f8b99;">${o.station || 'Station 1'}</span></td>
+                    <td><span class="status-badge status-confirmed">${o.status || 'Received'}</span></td>
+                    <td>
+                        <select onchange="updateOrderStatus('${o.orderId || o.id}', this.value)" style="background:#09090e; border:1px solid #3498db; color:#fff; border-radius:4px; padding:4px;">
+                            <option value="">Change Status...</option>
+                            <option value="Preparing in Royal Rasoi">Preparing</option>
+                            <option value="Ready for Service / Dispatch">Ready</option>
+                            <option value="Fulfilled">Fulfilled</option>
+                        </select>
+                    </td>
+                </tr>
+                `;
+            }).join('');
+        }
+
+        function renderReviewsGrid() {
+            const container = document.getElementById('reviewsContainer');
+            if (!adminData.reviews.length) {
+                container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: #888;">No reviews recorded yet.</div>';
+                return;
+            }
+
+            container.innerHTML = adminData.reviews.map(r => {
+                const stars = '★'.repeat(r.rating || 5) + '☆'.repeat(5 - (r.rating || 5));
+                return `
+                <div class="review-card-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="review-stars">${stars}</div>
+                        <span style="font-size: 0.75rem; color: #8f8b99;">${r.date || 'September 2026'}</span>
+                    </div>
+                    <p style="margin: 0; font-style: italic; color: #ded8cb; font-size: 0.88rem; line-height: 1.5;">"${r.comment || r.content || ''}"</p>
+                    <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong style="color: #ffffff; font-size: 0.9rem; display: block;">${r.author || r.name || 'Verified Diner'}</strong>
+                            <span style="font-size: 0.75rem; color: #d4af37;">${r.title || r.dish || 'Michelin Experience'}</span>
+                        </div>
+                        <span class="status-badge status-confirmed" style="font-size: 0.68rem;"><i class="fa-solid fa-check"></i> Verified</span>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        async function updateResStatus(id, status) {
+            if (!status) return;
+            try {
+                await fetch(`/api/reservations/${id}/status`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status })
+                });
+                fetchAdminData();
+            } catch (e) {
+                alert('Status update failed');
+            }
+        }
+
+        async function updateOrderStatus(id, status) {
+            if (!status) return;
+            try {
+                await fetch(`/api/orders/${id}/status`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status })
+                });
+                fetchAdminData();
+            } catch (e) {
+                alert('Order update failed');
+            }
+        }
+
+        function filterTable(tableId, query) {
+            const trs = document.querySelectorAll(`#${tableId} tbody tr`);
+            trs.forEach(tr => {
+                const text = tr.innerText.toLowerCase();
+                tr.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // 1. Update Active State on Sidebar
+            document.querySelectorAll('#sidebarNav .admin-nav-item').forEach(el => {
+                if (el.getAttribute('data-tab') === tab) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+            
+            // 2. Update Header Title & Subtitle
+            const tabMeta = {
+                overview: {
+                    title: 'Executive Overview',
+                    subtitle: 'Real-time gastronomy management and reservation control desk'
+                },
+                reservations: {
+                    title: 'Table Reservations Control',
+                    subtitle: 'Manage banquet seatings, guest lists, and imperial table status'
+                },
+                orders: {
+                    title: 'Live Kitchen Orders',
+                    subtitle: 'Track real-time tickets, station assignments, and dispatch stages'
+                },
+                inquiries: {
+                    title: 'Concierge Inquiry Inbox',
+                    subtitle: 'Direct guest communications dispatched to mkd9a32@gmail.com & WhatsApp'
+                },
+                reviews: {
+                    title: 'Guest Testimonials & Reviews',
+                    subtitle: 'Verified diner feedback and culinary ratings for SAVORIA'
+                }
+            };
+            
+            const meta = tabMeta[tab] || tabMeta.overview;
+            document.getElementById('tabTitle').textContent = meta.title;
+            document.getElementById('tabSubtitle').textContent = meta.subtitle;
+
+            // 3. Show / Hide Sections based on selected Tab
+            const sections = {
+                reservations: document.getElementById('sectionReservations'),
+                inquiries: document.getElementById('sectionInquiries'),
+                orders: document.getElementById('sectionOrders'),
+                reviews: document.getElementById('sectionReviews')
+            };
+
+            if (tab === 'overview') {
+                // In Overview mode: Show all sections
+                Object.values(sections).forEach(sec => {
+                    if (sec) sec.style.display = 'block';
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                // In Specific Tab mode: Show ONLY that tab section and scroll up cleanly
+                Object.keys(sections).forEach(key => {
+                    if (sections[key]) {
+                        if (key === tab) {
+                            sections[key].style.display = 'block';
+                            sections[key].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else {
+                            sections[key].style.display = 'none';
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize Data Load
+        fetchAdminData();
+        setInterval(fetchAdminData, 15000); // Live sync every 15s
+    </script>
+</body>
+</html>

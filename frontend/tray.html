@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Artisanal Order Tray — SAVORIA Fine Dining</title>
+    <meta name="description" content="Review your curated culinary selections, select courier delivery or curbside pickup, and finalize your artisanal gastronomy order at SAVORIA.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="tray-page-body">
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span class="badge-award"><i class="fa-solid fa-star"></i> MICHELIN Guide 2026 Selection</span>
+            <div class="top-bar-links">
+                <span id="liveStatusBadge" class="live-status"><span class="pulse-dot"></span> Open Today: 5:00 PM – 11:30 PM</span>
+                <a href="tel:+91XXXXXXXXXX" class="top-phone"><i class="fa-solid fa-phone"></i> +91 XXXXX XXXXX</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="header" id="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-symbol">❖</span>
+                <div class="logo-text-group">
+                    <span class="logo-text">SAVORIA</span>
+                    <span class="logo-sub">HAUTE CUISINE</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="nav-link">Culinary Menu</a></li>
+                <li><a href="index.html#experience" class="nav-link">The Experience</a></li>
+                <li><a href="index.html#reservations" class="nav-link">Reservations</a></li>
+                <li><a href="index.html#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Cart Pill active on Tray Page -->
+                <a href="tray.html" class="cart-pill-btn active-tray-pill" id="cartTriggerBtn" aria-label="View Dining Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-pill-text">Order Tray</span>
+                    <span class="cart-badge" id="cartCountBadge">0</span>
+                </a>
+
+                <!-- User Account Dynamic Container -->
+                <div class="user-auth-nav-slot" id="userAuthNavSlot"></div>
+
+                <a href="index.html#reservations" class="btn btn-primary btn-sm nav-reserve-btn">
+                    <span>Reserve a Table</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-content">
+            <ul class="mobile-links">
+                <li><a href="index.html#hero" class="mobile-link">Home</a></li>
+                <li><a href="index.html#about" class="mobile-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="mobile-link">Culinary Menu</a></li>
+                <li><a href="tray.html" class="mobile-link">Order Tray</a></li>
+                <li><a href="auth.html" class="mobile-link">Member Portal / Sign In</a></li>
+                <li><a href="index.html#reservations" class="mobile-link">Reservations</a></li>
+                <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content: Dedicated Order Tray & Checkout Page -->
+    <main class="tray-main-section">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <nav class="dish-breadcrumbs" aria-label="Breadcrumbs">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <span>/</span>
+                <a href="index.html#menu">Culinary Menu</a>
+                <span>/</span>
+                <span class="active-crumb">Artisanal Order Tray</span>
+            </nav>
+
+            <div class="tray-page-header">
+                <span class="section-tag">SAVORIA AT YOUR TABLE</span>
+                <h1 class="tray-page-title">Your Curated Order Tray</h1>
+                <p class="tray-page-subtitle">Review your artisanal selections, select delivery or private pickup, and finalize your culinary order.</p>
+            </div>
+
+            <!-- Main Tray Grid -->
+            <div class="tray-grid-container" id="trayGridContainer">
+                <!-- Left: Items List Column -->
+                <div class="tray-items-column">
+                    <div class="tray-card-box">
+                        <div class="tray-card-box-header">
+                            <h3><i class="fa-solid fa-utensils"></i> Selected Creations (<span id="trayItemCountLabel">0 items</span>)</h3>
+                            <button class="btn-clear-tray" id="clearTrayBtn" onclick="clearEntireCart()">
+                                <i class="fa-solid fa-trash-can"></i> Clear All
+                            </button>
+                        </div>
+
+                        <!-- Dynamic Items Container -->
+                        <div class="tray-items-wrapper" id="trayPageItemsList">
+                            <!-- Populated dynamically via app.js -->
+                        </div>
+
+                        <div class="tray-continue-bar">
+                            <a href="index.html#menu" class="btn-continue-shopping">
+                                <i class="fa-solid fa-arrow-left"></i> Add More Dishes from Menu
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Beverage Pairing Upsell -->
+                    <div class="tray-upsell-box">
+                        <div class="upsell-header">
+                            <i class="fa-solid fa-wine-glass"></i>
+                            <div>
+                                <h4>Sommelier Cellar Recommendations</h4>
+                                <span>Complete your dinner with a paired grand cru vintage or signature cocktail</span>
+                            </div>
+                        </div>
+                        <div class="upsell-items-grid" id="trayUpsellGrid">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Order Details & Checkout Form Column -->
+                <div class="tray-checkout-column">
+                    <div class="tray-checkout-card">
+                        <div class="checkout-card-header">
+                            <h3>Fulfillment & Checkout</h3>
+                            <span class="badge-award"><i class="fa-solid fa-shield-halved"></i> Secure Order</span>
+                        </div>
+
+                        <form id="trayCheckoutForm" class="tray-checkout-form" onsubmit="handleTrayProceedPayment(event)">
+                            <!-- Service Type Toggle -->
+                            <div class="service-type-selector">
+                                <label class="service-type-tab active" id="tabPickup">
+                                    <input type="radio" name="trayOrderType" value="pickup" checked onchange="handleTrayOrderTypeChange('pickup')">
+                                    <i class="fa-solid fa-store"></i>
+                                    <div>
+                                        <strong>Royal Valet Pickup</strong>
+                                        <span>Ready in 30–40 min</span>
+                                    </div>
+                                </label>
+                                <label class="service-type-tab" id="tabDelivery">
+                                    <input type="radio" name="trayOrderType" value="delivery" onchange="handleTrayOrderTypeChange('delivery')">
+                                    <i class="fa-solid fa-car-side"></i>
+                                    <div>
+                                        <strong>Royal Chauffeur</strong>
+                                        <span>White-glove delivery</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Guest Information -->
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="trayName"><i class="fa-regular fa-user"></i> Full Name</label>
+                                    <input type="text" id="trayName" autocomplete="name" placeholder="e.g. Maharaja Yuvraj Singh">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trayPhone"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Phone</label>
+                                    <input type="tel" id="trayPhone" autocomplete="tel" placeholder="e.g. +91 98101 23456">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="trayEmail"><i class="fa-regular fa-envelope"></i> Email Address (for royal receipt & tracking)</label>
+                                    <input type="email" id="trayEmail" autocomplete="email" placeholder="e.g. maharaja@savoria.in">
+                                </div>
+                                <div class="form-group full-width" id="trayAddressGroup" style="display: none;">
+                                    <label for="trayAddress"><i class="fa-solid fa-location-dot"></i> Delivery Address (Delhi NCR / Mumbai / Bangalore)</label>
+                                    <input type="text" id="trayAddress" placeholder="Bungalow / Estate address, Suite, City">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="trayPrepTime"><i class="fa-regular fa-clock"></i> Preferred Feast Timing</label>
+                                    <select id="trayPrepTime">
+                                        <option value="asap">As soon as prepared fresh (~35 min)</option>
+                                        <option value="19:00">Tonight at 7:00 PM</option>
+                                        <option value="20:00">Tonight at 8:00 PM</option>
+                                        <option value="21:00">Tonight at 9:00 PM</option>
+                                        <option value="22:00">Tonight at 10:00 PM</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="traySpecialInstructions"><i class="fa-solid fa-pen-fancy"></i> Royal Preparation Notes</label>
+                                    <textarea id="traySpecialInstructions" rows="2" placeholder="Spice tolerance, Jain preparation, dietary allergies or gate instructions"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Gratuity Selection -->
+                            <div class="tray-tip-box">
+                                <span class="tray-tip-title">Hospitality Brigade Gratuity:</span>
+                                <div class="tray-tip-pills" id="trayTipPills">
+                                    <button type="button" class="t-tip-btn" data-tip="10" onclick="setTrayTip(10)">10%</button>
+                                    <button type="button" class="t-tip-btn active" data-tip="15" onclick="setTrayTip(15)">15%</button>
+                                    <button type="button" class="t-tip-btn" data-tip="20" onclick="setTrayTip(20)">20%</button>
+                                    <button type="button" class="t-tip-btn" data-tip="0" onclick="setTrayTip(0)">0% / Custom</button>
+                                </div>
+                            </div>
+
+                            <!-- Live Price Summary Breakdown -->
+                            <div class="tray-price-breakdown">
+                                <div class="p-row">
+                                    <span>Subtotal:</span>
+                                    <span id="traySubtotal">₹0</span>
+                                </div>
+                                <div class="p-row">
+                                    <span>Indian Restaurant GST (5%):</span>
+                                    <span id="trayTax">₹0</span>
+                                </div>
+                                <div class="p-row">
+                                    <span>Hospitality Staff Gratuity:</span>
+                                    <span id="trayTipAmount">₹0</span>
+                                </div>
+                                <div class="p-row total-row">
+                                    <span>Total Payable:</span>
+                                    <span id="trayTotal" class="text-gold">₹0</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full submit-order-btn" id="trayProceedPayBtn" onclick="handleTrayProceedPayment(event)">
+                                <span>Proceed to Secure Payment</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+
+                            <p class="order-security-note">
+                                <i class="fa-solid fa-shield-halved"></i> 256-bit encrypted gateway • Instant SMS & WhatsApp tracking alerts
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="tray-empty-container" id="trayEmptyContainer" style="display: none;">
+                <div class="empty-tray-card">
+                    <div class="empty-tray-icon">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <h2>Your Order Tray is Currently Empty</h2>
+                    <p>Discover our award-winning seasonal creations, artisanal pastas, and rare cellar pairings to begin your culinary experience.</p>
+                    <a href="index.html#menu" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Explore the Culinary Menu</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 SAVORIA Haute Cuisine Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="index.html">Back to Main Website</a>
+                    <span>•</span>
+                    <a href="index.html#reservations">Reserve Table</a>
+                    <span>•</span>
+                    <a href="kitchen-orders.html" target="_blank" title="Internal Kitchen Staff Portal"><i class="fa-solid fa-lock"></i> Staff / Kitchen Line</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App Logic -->
+    <script src="app.js?v=3.0"></script>
+</body>
+</html>

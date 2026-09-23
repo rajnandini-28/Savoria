@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAVORIA — Fine Dining & Artisanal Gastronomy</title>
+    <meta name="description" content="Experience award-winning culinary excellence at SAVORIA. Farm-to-table seasonal menus, artisanal wines, and an unforgettable fine dining ambiance.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css?v=3.5">
+</head>
+<body>
+    <!-- Top Bar Announcement -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span class="badge-award"><i class="fa-solid fa-star"></i> MICHELIN Guide 2026 Selection</span>
+            <span class="top-bar-text"><i class="fa-regular fa-clock"></i> Tonight's Tasting Menu: <strong>Imperial Dastarkhwan</strong></span>
+            <div class="top-bar-links">
+                <span id="liveStatusBadge" class="live-status"><span class="pulse-dot"></span> Open Today: 5:00 PM – 11:30 PM</span>
+                <a href="tel:+91XXXXXXXXXX" class="top-phone"><i class="fa-solid fa-phone"></i> +91 XXXXX XXXXX</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header" id="navbar">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-symbol">❖</span>
+                <div class="logo-text-group">
+                    <span class="logo-text">SAVORIA</span>
+                    <span class="logo-sub">HAUTE CUISINE</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">Our Story</a></li>
+                <li><a href="#menu" class="nav-link">Culinary Menu</a></li>
+                <li><a href="#experience" class="nav-link">The Experience</a></li>
+                <li><a href="#reservations" class="nav-link">Reservations</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Cart Pill Button -->
+                <a href="tray.html" class="cart-pill-btn" id="cartTriggerBtn" aria-label="View Dining Order Tray">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-pill-text">Order Tray</span>
+                    <span class="cart-badge" id="cartCountBadge">0</span>
+                </a>
+
+                <!-- User Account Dynamic Container -->
+                <div class="user-auth-nav-slot" id="userAuthNavSlot"></div>
+
+                <a href="#reservations" class="btn btn-primary btn-sm nav-reserve-btn">
+                    <span>Reserve a Table</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-content">
+            <ul class="mobile-links">
+                <li><a href="#hero" class="mobile-link">Home</a></li>
+                <li><a href="#about" class="mobile-link">Our Story</a></li>
+                <li><a href="#menu" class="mobile-link">Culinary Menu</a></li>
+                <li><a href="tray.html" class="mobile-link">Order Tray</a></li>
+                <li><a href="auth.html" class="mobile-link">Member Portal / Sign In</a></li>
+                <li><a href="#experience" class="mobile-link">The Experience</a></li>
+                <li><a href="#reservations" class="mobile-link">Reservations</a></li>
+                <li><a href="#testimonials" class="mobile-link">Reviews</a></li>
+                <li><a href="#contact" class="mobile-link">Contact</a></li>
+            </ul>
+            <div class="mobile-drawer-footer">
+                <a href="#reservations" class="btn btn-primary btn-full mobile-drawer-btn">Book Your Table</a>
+                <div class="mobile-contact-info">
+                    <p><i class="fa-solid fa-location-dot"></i> 450 Heritage Marg, Lutyens' Delhi</p>
+                    <p><i class="fa-solid fa-phone"></i> +91 11 4555 8900</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-bg-overlay"></div>
+            <div class="hero-glow glow-1"></div>
+            <div class="hero-glow glow-2"></div>
+            
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-tagline">
+                        <span class="gold-line"></span>
+                        <span class="tagline-text">IMPERIAL INDIAN GASTRONOMY & SHAHI DASTARKHWAN</span>
+                        <span class="gold-line"></span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Where Royal Heritage <br>
+                        <span class="text-gradient">Meets Culinary Grandeur</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Embark on an opulent culinary voyage through the royal kitchens of Awadh, Mewar, and Rampur. Savor slow-cooked Dum Pukht delicacies, clay tandoor kebabs, and heritage elixirs.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="#reservations" class="btn btn-primary btn-lg">
+                            <span>Reserve Royal Table</span>
+                            <i class="fa-solid fa-crown"></i>
+                        </a>
+                        <a href="#menu" class="btn btn-secondary btn-lg">
+                            <span>Explore Shahi Menu</span>
+                            <i class="fa-solid fa-book-open"></i>
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">3★</span>
+                            <span class="stat-label">Michelin Selected</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">32+</span>
+                            <span class="stat-label">Royal Potli Spices</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">A2 Ghee & Organic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-card-stack">
+                        <div class="featured-plate-card">
+                            <div class="plate-img-wrapper">
+                                <img src="assets/dishes/awadhi_nalli_nihari_1789900162831.jpg" alt="Royal Awadhi Nalli Nihari" class="plate-img">
+                                <div class="plate-badge"><i class="fa-solid fa-crown"></i> Royal Signature</div>
+                            </div>
+                            <div class="plate-details">
+                                <div class="plate-header">
+                                    <h3>Awadhi Nalli Nihari</h3>
+                                    <span class="plate-price">₹1,450</span>
+                                </div>
+                                <p>12-hour slow-braised baby lamb shanks in bone marrow yakhni & 24k gold leaf</p>
+                                <div class="plate-footer">
+                                    <span class="rating-stars"><i class="fa-solid fa-star"></i> 4.9 (240+ reviews)</span>
+                                    <a href="dish.html?id=awadhi-nalli-nihari" onclick="goToDish('awadhi-nalli-nihari', event)" class="btn-text">Savor Dish <i class="fa-solid fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Accent Badges -->
+                        <div class="floating-badge badge-top">
+                            <div class="floating-badge-icon"><i class="fa-solid fa-crown"></i></div>
+                            <div class="floating-badge-text">
+                                <strong>Dum Pukht Hearth</strong>
+                                <span>Slow-Cooked Sealed Deghs</span>
+                            </div>
+                        </div>
+
+                        <div class="floating-badge badge-bottom">
+                            <div class="floating-badge-icon"><i class="fa-solid fa-gem"></i></div>
+                            <div class="floating-badge-text">
+                                <strong>Pampore Saffron</strong>
+                                <span>Pure Kashmiri Zafran & Ghee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <a href="#about" class="scroll-down-btn" aria-label="Scroll to About Section">
+                <div class="mouse-icon">
+                    <div class="wheel"></div>
+                </div>
+                <span>Discover Royal Court</span>
+            </a>
+        </section>
+
+        <!-- About / Story Section -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-images">
+                        <div class="about-img-main">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="SAVORIA Royal Dining Hall" class="img-responsive rounded-luxury">
+                        </div>
+                        <div class="about-img-sub">
+                            <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80" alt="Master Ustad Preparing Kebabs" class="img-responsive rounded-luxury">
+                            <div class="experience-badge">
+                                <span class="badge-years">25+</span>
+                                <span class="badge-exp-text">Years of Royal Heritage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-content">
+                        <div class="section-tag">OUR IMPERIAL HERITAGE</div>
+                        <h2 class="section-title">The Grand Revival of India's Royal Dastarkhwans</h2>
+                        <div class="gold-ornament">❖ ❖ ❖</div>
+                        
+                        <p class="about-text-lead">
+                            <strong>SAVORIA</strong> was conceived as a sacred homage to the legendary culinary courts of Awadh, Mewar, Rampur, and the Malabar coast.
+                        </p>
+                        
+                        <p class="about-text">
+                            Under the stewardship of Master Ustad Auguste Moreau, our kitchen revives ancient slow-cooking secrets (Dum Pukht) where fragrant yakhni broths, cold-pressed stone spices, and organic A2 ghee marry contemporary Michelin-starred finesse.
+                        </p>
+
+                        <div class="about-pillars">
+                            <div class="pillar-card">
+                                <div class="pillar-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                                <div>
+                                    <h4>Slow Dum Pukht Alchemy</h4>
+                                    <p>Sealed earthen handis cooked on low charcoal heat to trap pure botanical aromatics.</p>
+                                </div>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="pillar-icon"><i class="fa-solid fa-gem"></i></div>
+                                <div>
+                                    <h4>Single-Estate Indian Spices</h4>
+                                    <p>Pampore saffron, Guntur chillies, Malabar tellicherry pepper, and Kannauj rose waters.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chef-signature-block">
+                            <div class="chef-info">
+                                <h4>Ustad Auguste Moreau</h4>
+                                <span>Culinary Director & Master of Dum Pukht</span>
+                            </div>
+                            <div class="chef-signature">Auguste Moreau</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signature Highlights -->
+        <section class="highlights-section">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-tag">ROYAL SIGNATURES</span>
+                    <h2 class="section-title">Imperial Tasting Highlights</h2>
+                    <p class="section-subtitle">Exquisite compositions crafted fresh for this evening's royal banquet</p>
+                </div>
+
+                <div class="highlights-grid">
+                    <a href="dish.html?id=galouti-kebab" onclick="goToDish('galouti-kebab', event)" class="highlight-card">
+                        <div class="highlight-img-box">
+                            <img src="assets/dishes/galouti_kebab_1789900179801.jpg" alt="Kakori Galouti Kebab">
+                            <span class="highlight-badge">Shahi Starter</span>
+                        </div>
+                        <div class="highlight-body">
+                            <div class="highlight-top">
+                                <h3>Kakori Galouti Kebab</h3>
+                                <span class="highlight-price">₹950</span>
+                            </div>
+                            <p>Melt-in-mouth Awadhi smoked lamb, 32 secret potli spices & saffron warqi paratha.</p>
+                            <div class="highlight-pairing">
+                                <i class="fa-solid fa-wine-glass"></i> Pairing: <em>Amrut Peated Indian Single Malt</em>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="dish.html?id=awadhi-nalli-nihari" onclick="goToDish('awadhi-nalli-nihari', event)" class="highlight-card highlight-featured">
+                        <div class="highlight-img-box">
+                            <img src="assets/dishes/awadhi_nalli_nihari_1789900162831.jpg" alt="Awadhi Nalli Nihari">
+                            <span class="highlight-badge gold"><i class="fa-solid fa-crown"></i> Crown Signature</span>
+                        </div>
+                        <div class="highlight-body">
+                            <div class="highlight-top">
+                                <h3>Awadhi Nalli Nihari</h3>
+                                <span class="highlight-price">₹1,450</span>
+                            </div>
+                            <p>12-hour slow-braised baby lamb shanks in bone-marrow yakhni jus & 24k gold leaf.</p>
+                            <div class="highlight-pairing">
+                                <i class="fa-solid fa-wine-glass"></i> Pairing: <em>2018 Sula Rasa Cabernet Sauvignon</em>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="dish.html?id=kesar-shahi-tukda" onclick="goToDish('kesar-shahi-tukda', event)" class="highlight-card">
+                        <div class="highlight-img-box">
+                            <img src="assets/dishes/shahi_tukda_1789900450183.jpg" alt="Kesar Shahi Tukda">
+                            <span class="highlight-badge">Royal Meetha</span>
+                        </div>
+                        <div class="highlight-body">
+                            <div class="highlight-top">
+                                <h3>Kesar Shahi Tukda</h3>
+                                <span class="highlight-price">₹650</span>
+                            </div>
+                            <p>Crisp ghee-fried milk brioche, reduced saffron rabri, pistachios & 24k gold leaf.</p>
+                            <div class="highlight-pairing">
+                                <i class="fa-solid fa-wine-glass"></i> Pairing: <em>Royal Tokaji / Saffron Chai</em>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Menu Section -->
+        <section class="menu-section" id="menu">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-tag">SHAHI DASTARKHWAN</span>
+                    <h2 class="section-title">The Royal Culinary Repertoire</h2>
+                    <p class="section-subtitle">Select any category to explore authentic regional Indian masterworks, spices, and sommelier notes</p>
+                </div>
+
+                <!-- Menu Controls & Filters -->
+                <div class="menu-controls">
+                    <!-- Search Bar -->
+                    <div class="menu-search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="menuSearchInput" placeholder="Search biryani, kebabs, nihari, or royal spices..." aria-label="Search Menu">
+                        <button id="clearSearchBtn" class="clear-search-btn" title="Clear Search"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="menu-category-tabs" id="categoryTabs">
+                        <button class="category-btn active" data-category="all">
+                            <i class="fa-solid fa-border-all"></i> All Royal Offerings
+                        </button>
+                        <button class="category-btn category-veg-btn" data-category="veg">
+                            <i class="fa-solid fa-seedling"></i> Pure Vegetarian
+                        </button>
+                        <button class="category-btn category-nonveg-btn" data-category="non-veg">
+                            <i class="fa-solid fa-drumstick-bite"></i> Non-Vegetarian Royal
+                        </button>
+                        <button class="category-btn" data-category="starters">
+                            <i class="fa-solid fa-fire-burner"></i> Shahi Starters & Kebabs
+                        </button>
+                        <button class="category-btn" data-category="signatures">
+                            <i class="fa-solid fa-crown"></i> Chef's Royal Signatures
+                        </button>
+                        <button class="category-btn" data-category="biryanis">
+                            <i class="fa-solid fa-bowl-rice"></i> Heritage Dum Biryanis
+                        </button>
+                        <button class="category-btn" data-category="breads">
+                            <i class="fa-solid fa-bread-slice"></i> Artisanal Breads & Naan
+                        </button>
+                        <button class="category-btn" data-category="desserts">
+                            <i class="fa-solid fa-cake-candles"></i> Royal Confectionery
+                        </button>
+                        <button class="category-btn" data-category="beverages">
+                            <i class="fa-solid fa-martini-glass-citrus"></i> Shahi Elixirs & Spirits
+                        </button>
+                    </div>
+
+                    <!-- Dietary Filter Badges -->
+                    <div class="dietary-filter-bar">
+                        <span class="dietary-label"><i class="fa-solid fa-sliders"></i> Dietary Preferences:</span>
+                        <div class="dietary-toggles">
+                            <button class="diet-toggle" data-diet="chef-pick"><i class="fa-solid fa-crown"></i> Royal Signature</button>
+                            <button class="diet-toggle" data-diet="veg"><i class="fa-solid fa-seedling"></i> Vegetarian</button>
+                            <button class="diet-toggle" data-diet="non-veg"><i class="fa-solid fa-drumstick-bite"></i> Non-Vegetarian</button>
+                            <button class="diet-toggle" data-diet="jain"><i class="fa-solid fa-leaf"></i> Jain Available</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Filter Status -->
+                <div class="menu-results-count" id="menuResultsCount">Showing all 24 royal culinary selections</div>
+
+                <!-- Menu Cards Grid -->
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Injected dynamically via app.js -->
+                </div>
+
+                <!-- Quiz Banner Card -->
+                <div class="menu-quiz-banner">
+                    <div class="quiz-banner-content">
+                        <div class="quiz-banner-badge"><i class="fa-solid fa-sparkles"></i> ROYAL SOMMELIER & RASOI ASSISTANT</div>
+                        <h3>Not Sure What to Savor Tonight?</h3>
+                        <p>Take our 30-second Royal Rasoi Pairing Quiz to discover your ideal 3-course banquet and heritage elixir pairing.</p>
+                    </div>
+                    <button class="btn btn-primary" id="openQuizBtnBanner">
+                        <span>Take Royal Pairing Quiz</span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Ambiance Showcase -->
+        <section class="experience-section" id="experience">
+            <div class="container">
+                <div class="experience-wrapper">
+                    <div class="experience-text-content">
+                        <span class="section-tag">THE ATMOSPHERE</span>
+                        <h2 class="section-title">An Immersive Symphony for the Senses</h2>
+                        <p class="experience-desc">
+                            From handcrafted crystal chandeliers and bespoke acoustic design to attentive sommelier consultations, every detail at SAVORIA is orchestrated to transport you into a world of heightened hospitality.
+                        </p>
+
+                        <div class="experience-features-list">
+                            <div class="exp-feature">
+                                <div class="exp-icon"><i class="fa-solid fa-music"></i></div>
+                                <div>
+                                    <h5>Live Jazz & Classical Nights</h5>
+                                    <p>Acoustic grand piano performances every Thursday through Saturday evening.</p>
+                                </div>
+                            </div>
+                            <div class="exp-feature">
+                                <div class="exp-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                                <div>
+                                    <h5>Private Sommelier Lounge</h5>
+                                    <p>Exclusive cellar dining and bespoke vintage tastings for intimate parties of up to 16.</p>
+                                </div>
+                            </div>
+                            <div class="exp-feature">
+                                <div class="exp-icon"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+                                <div>
+                                    <h5>Heated Garden Pergola</h5>
+                                    <p>Year-round open-air dining surrounded by private botanical gardens and fire features.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="exp-cta">
+                            <a href="#reservations" class="btn btn-primary">Book an Evening with Us</a>
+                        </div>
+                    </div>
+
+                    <div class="experience-gallery-mosaic">
+                        <div class="mosaic-col col-1">
+                            <div class="mosaic-item">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Main Dining Room Interior">
+                                <div class="mosaic-overlay"><span>The Main Dining Hall</span></div>
+                            </div>
+                            <div class="mosaic-item">
+                                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" alt="Sommelier Wine Pouring">
+                                <div class="mosaic-overlay"><span>Grand Cru Sommelier Service</span></div>
+                            </div>
+                        </div>
+                        <div class="mosaic-col col-2">
+                            <div class="mosaic-item">
+                                <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=600&q=80" alt="Chef plating with tweezers">
+                                <div class="mosaic-overlay"><span>Culinary Precision</span></div>
+                            </div>
+                            <div class="mosaic-item">
+                                <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=600&q=80" alt="Private Garden Terrace">
+                                <div class="mosaic-overlay"><span>Garden Terrace At Night</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Reservation Section -->
+        <section class="reservations-section" id="reservations">
+            <div class="container">
+                <div class="reservation-box-wrapper">
+                    <div class="reservation-info-pane">
+                        <span class="section-tag">ONLINE RESERVATION</span>
+                        <h2 class="section-title">Reserve Your Table</h2>
+                        <p class="pane-description">
+                            Experience culinary artistry in an atmosphere of warmth and refinement. We welcome reservations up to 60 days in advance.
+                        </p>
+
+                        <div class="reservation-guidelines">
+                            <div class="guideline-item">
+                                <i class="fa-solid fa-shirt"></i>
+                                <div>
+                                    <h6>Dress Code</h6>
+                                    <p>Smart Elegant / Formal attire appreciated. Athletic wear is politely declined.</p>
+                                </div>
+                            </div>
+                            <div class="guideline-item">
+                                <i class="fa-solid fa-users"></i>
+                                <div>
+                                    <h6>Large Parties (8+)</h6>
+                                    <p>For celebrations or private event inquiries, our events concierge is at your service.</p>
+                                </div>
+                            </div>
+                            <div class="guideline-item">
+                                <i class="fa-solid fa-credit-card"></i>
+                                <div>
+                                    <h6>Cancellation Policy</h6>
+                                    <p>Complimentary cancellations up to 24 hours prior to booking time.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="concierge-direct">
+                            <p>Direct Concierge Line:</p>
+                            <a href="tel:+91XXXXXXXXXX" class="concierge-phone"><i class="fa-solid fa-phone-volume"></i> +91 XXXXX XXXXX</a>
+                        </div>
+                    </div>
+
+                    <div class="reservation-form-pane">
+                        <form id="reservationForm" class="reservation-form" novalidate>
+                            <div class="form-header">
+                                <h3>Book Your Dining Experience</h3>
+                                <div class="form-header-actions">
+                                    <button type="button" class="btn-floorplan-toggle" id="openFloorPlanBtn">
+                                        <i class="fa-solid fa-map-location-dot"></i>
+                                        <span>Visual Table Map</span>
+                                    </button>
+                                    <span class="form-step-indicator"><i class="fa-solid fa-shield-halved"></i> Instant Confirmation</span>
+                                </div>
+                            </div>
+
+                            <!-- Step 1: Guests, Date, Time & Seating -->
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="resGuests"><i class="fa-solid fa-user-group"></i> Guests</label>
+                                    <select id="resGuests" name="guests" required>
+                                        <option value="1">1 Person (Chef's Counter)</option>
+                                        <option value="2" selected>2 Guests (Intimate Table)</option>
+                                        <option value="3">3 Guests</option>
+                                        <option value="4">4 Guests (Standard Dining)</option>
+                                        <option value="5">5 Guests</option>
+                                        <option value="6">6 Guests (Booth Table)</option>
+                                        <option value="7">7 Guests</option>
+                                        <option value="8">8 Guests (Large Table)</option>
+                                        <option value="private">9+ Guests (Private Suite Request)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="resDate"><i class="fa-regular fa-calendar-days"></i> Date</label>
+                                    <input type="date" id="resDate" name="date" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="resTime"><i class="fa-regular fa-clock"></i> Preferred Time</label>
+                                    <select id="resTime" name="time" required>
+                                        <option value="" disabled selected>Select a time slot</option>
+                                        <optgroup label="Dinner Service">
+                                            <option value="17:00">5:00 PM (Early Dinner)</option>
+                                            <option value="17:30">5:30 PM</option>
+                                            <option value="18:00">6:00 PM</option>
+                                            <option value="18:30">6:30 PM</option>
+                                            <option value="19:00">7:00 PM (Prime)</option>
+                                            <option value="19:30">7:30 PM (Prime)</option>
+                                            <option value="20:00">8:00 PM (Prime)</option>
+                                            <option value="20:30">8:30 PM</option>
+                                            <option value="21:00">9:00 PM (Late Dining)</option>
+                                            <option value="21:30">9:30 PM</option>
+                                        </optgroup>
+                                        <optgroup label="Weekend Lunch (Sat-Sun)">
+                                            <option value="12:00">12:00 PM</option>
+                                            <option value="13:00">1:00 PM</option>
+                                            <option value="14:00">2:00 PM</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="resSeating"><i class="fa-solid fa-couch"></i> Seating Area</label>
+                                    <select id="resSeating" name="seating">
+                                        <option value="Main Dining Room" selected>Main Dining Room (Crystal Hall)</option>
+                                        <option value="Garden Terrace">Garden Terrace (Heated Pergola)</option>
+                                        <option value="Chef's Open Counter">Chef's Open Counter (Interactive)</option>
+                                        <option value="Sommelier Wine Cellar">Private Sommelier Wine Cellar</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Info -->
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="resName"><i class="fa-regular fa-user"></i> Full Name</label>
+                                    <input type="text" id="resName" name="fullName" autocomplete="name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="resEmail"><i class="fa-regular fa-envelope"></i> Email Address</label>
+                                    <input type="email" id="resEmail" name="email" autocomplete="email" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="resPhone"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Phone</label>
+                                    <input type="tel" id="resPhone" name="phone" autocomplete="tel" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="resOccasion"><i class="fa-solid fa-gift"></i> Special Occasion</label>
+                                    <select id="resOccasion" name="occasion">
+                                        <option value="None">Casual Fine Dining</option>
+                                        <option value="Birthday">Birthday Celebration</option>
+                                        <option value="Anniversary">Anniversary</option>
+                                        <option value="Business Dinner">Business Dinner</option>
+                                        <option value="Romantic Date">Romantic Date</option>
+                                        <option value="Proposal">Special Celebration / Proposal</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="resRequests"><i class="fa-solid fa-pen-fancy"></i> Dietary Requirements or Special Requests</label>
+                                <textarea id="resRequests" name="requests" rows="2" placeholder="Dietary requirements, allergies, or special celebration notes"></textarea>
+                            </div>
+
+                            <!-- Live Dynamic Booking Summary Box -->
+                            <div class="reservation-live-summary" id="resSummaryBox">
+                                <div class="summary-item"><i class="fa-solid fa-calendar-check"></i> <span id="sumDate">Select Date</span></div>
+                                <div class="summary-item"><i class="fa-solid fa-clock"></i> <span id="sumTime">Select Time</span></div>
+                                <div class="summary-item"><i class="fa-solid fa-users"></i> <span id="sumGuests">2 Guests</span></div>
+                                <div class="summary-item"><i class="fa-solid fa-map-pin"></i> <span id="sumSeating">Main Dining Room</span></div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full submit-res-btn">
+                                <span>Complete Table Reservation</span>
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                            <p class="reservation-disclaimer">
+                                <i class="fa-solid fa-lock"></i> Instant confirmation sent via SMS & Email. No upfront deposit required.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials & Press Accolades -->
+        <section class="testimonials-section" id="testimonials">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-tag">CRITICAL ACCLAIM</span>
+                    <h2 class="section-title">Words From Our Diners & Critics</h2>
+                    <p class="section-subtitle">Read what renowned culinary critics and cherished guests have to say about SAVORIA</p>
+                    <div style="margin-top: 18px;">
+                        <button class="btn btn-secondary btn-sm" id="openReviewModalBtn">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Write a Diner Review</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Testimonial Slider -->
+                <div class="testimonial-slider-container">
+                    <button class="slider-arrow prev" id="sliderPrevBtn" aria-label="Previous Testimonial">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <div class="testimonial-slides-track" id="testimonialTrack">
+                        <!-- Slide 1 -->
+                        <div class="testimonial-card active">
+                            <div class="quote-icon"><i class="fa-solid fa-quote-right"></i></div>
+                            <div class="stars-row">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="testimonial-quote">
+                                "SAVORIA provides an orchestration of flavors that redefines Royal Indian gastronomy. The Awadhi Nalli Nihari with slow-melted bone marrow and 24k gold leaf is nothing short of celestial."
+                            </p>
+                            <div class="reviewer-meta">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Rohini Sengupta" class="reviewer-avatar">
+                                <div>
+                                    <h4 class="reviewer-name">Rohini Sengupta</h4>
+                                    <span class="reviewer-title">Lead Food Critic, <em>The Culinary Chronicle India</em></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="testimonial-card">
+                            <div class="quote-icon"><i class="fa-solid fa-quote-right"></i></div>
+                            <div class="stars-row">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="testimonial-quote">
+                                "We celebrated our 10th anniversary in the Shahi Diwan Vault. The level of attentive royal hospitality, single-malt pairings, and Dum Pukht alchemy surpassed every Michelin-starred venue worldwide."
+                            </p>
+                            <div class="reviewer-meta">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Vikram & Ananya Singhania" class="reviewer-avatar">
+                                <div>
+                                    <h4 class="reviewer-name">Vikram Singhania</h4>
+                                    <span class="reviewer-title">Verified Guest • Anniversary Banquet</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="testimonial-card">
+                            <div class="quote-icon"><i class="fa-solid fa-quote-right"></i></div>
+                            <div class="stars-row">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="testimonial-quote">
+                                "Ustad Moreau’s slow-fired earthen handis and single-estate Pampore saffron transform ancient royal secrets into pure poetry. A true culinary sanctuary in New Delhi."
+                            </p>
+                            <div class="reviewer-meta">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Sameer Mathur" class="reviewer-avatar">
+                                <div>
+                                    <h4 class="reviewer-name">Sameer Mathur</h4>
+                                    <span class="reviewer-title">Contributing Editor, <em>Gastronomie Internationale</em></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="slider-arrow next" id="sliderNextBtn" aria-label="Next Testimonial">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Slider Indicators -->
+                <div class="slider-dots" id="sliderDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+
+                <!-- Press Logos Strip -->
+                <div class="press-strip">
+                    <div class="press-item"><i class="fa-solid fa-certificate"></i> ASIA'S 50 BEST RESTAURANTS</div>
+                    <div class="press-item"><i class="fa-solid fa-gem"></i> MICHELIN GUIDE 2026</div>
+                    <div class="press-item"><i class="fa-solid fa-award"></i> TIMES FOOD CRITICS' CHOICE</div>
+                    <div class="press-item"><i class="fa-solid fa-wine-glass-empty"></i> WINE SPECTATOR GRAND AWARD</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location, Hours & Contact -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact & Hours Info -->
+                    <div class="contact-info-card">
+                        <span class="section-tag">VISIT SAVORIA</span>
+                        <h2 class="section-title">Hours & Location</h2>
+                        <p class="contact-lead-text">
+                            Nestled in Lutyens' Bungalow Zone, New Delhi. Royal Chauffeur valet service is complimentary for all banquet guests.
+                        </p>
+
+                        <div class="contact-details-list">
+                            <div class="c-detail-item">
+                                <div class="c-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <h6>Address</h6>
+                                    <p>450 Heritage Marg, Lutyens' Zone<br>New Delhi, Delhi 110001, India</p>
+                                    <a href="https://maps.google.com" target="_blank" rel="noopener" class="map-link">Get Directions <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="c-detail-item">
+                                <div class="c-icon"><i class="fa-regular fa-clock"></i></div>
+                                <div>
+                                    <h6>Operating Schedule</h6>
+                                    <ul class="schedule-list">
+                                        <li><span>Tuesday – Friday:</span> <strong>6:30 PM – 11:30 PM</strong></li>
+                                        <li><span>Saturday – Sunday:</span> <strong>12:30 PM – 3:30 PM, 7:00 PM – Midnight</strong></li>
+                                        <li><span>Monday:</span> <strong class="closed-tag">Closed for Spice Curation</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="c-detail-item">
+                                <div class="c-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <h6>Royal Concierge & Owner Desk</h6>
+                                    <p><a href="mailto:mkd9a32@gmail.com">mkd9a32@gmail.com</a></p>
+                                    <p><a href="tel:+919982072287" style="color: var(--gold-light); font-weight: 700; font-size: 1.05rem;"><i class="fa-solid fa-phone"></i> +91 99820 72287</a></p>
+                                    <div style="margin-top: 10px;">
+                                        <a href="https://wa.me/919982072287?text=Namaste%20SAVORIA,%20I%20would%20like%20to%20inquire%20about%20dining%20and%20reservations." target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; border-color: rgba(37, 211, 102, 0.4); color: #25D366; background: rgba(37, 211, 102, 0.08);">
+                                            <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem; color: #25D366;"></i>
+                                            <span>Chat on WhatsApp</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Message / Quick Inquiry Form -->
+                    <div class="contact-form-card">
+                        <div class="contact-form-header">
+                            <h3>Private Events & Inquiries</h3>
+                            <p>For private dining buyouts, table inquiries, or immediate assistance</p>
+                        </div>
+
+                        <form id="quickContactForm" class="quick-contact-form">
+                            <div class="form-group">
+                                <label for="cName">Your Name</label>
+                                <input type="text" id="cName" autocomplete="name" placeholder="Your Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cPhone">Phone Number</label>
+                                <input type="tel" id="cPhone" autocomplete="tel" placeholder="+91 98765 43210" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cEmail">Email Address</label>
+                                <input type="email" id="cEmail" autocomplete="email" placeholder="yourname@gmail.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cSubject">Topic</label>
+                                <select id="cSubject">
+                                    <option value="private-dining">Private Dining / Corporate Banquet</option>
+                                    <option value="table-inquiry">Table Reservation Special Request</option>
+                                    <option value="catering">Royal Shahi Catering & Events</option>
+                                    <option value="feedback">General Guest Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="cMessage">Message</label>
+                                <textarea id="cMessage" rows="3" placeholder="Write your inquiry or booking request here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <span>Send Message to Owner</span>
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter & VIP Club -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-card">
+                    <div class="newsletter-content">
+                        <span class="badge-award"><i class="fa-solid fa-envelope-open-text"></i> THE CONNOISSEUR CLUB</span>
+                        <h2>Receive Exclusive Seasonal Invitations</h2>
+                        <p>Subscribe to receive priority booking windows for new seasonal menu unveilings, rare cellar releases, and guest chef masterclasses.</p>
+                    </div>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletterEmail" placeholder="Enter your email address..." required aria-label="Newsletter Email">
+                            <button type="submit" class="btn btn-primary">
+                                <span>Subscribe</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-symbol">❖</span>
+                        <span class="logo-text">SAVORIA</span>
+                    </a>
+                    <p class="footer-tagline">
+                        Where royal Indian dastarkhwans meet modern Michelin mastery. Crafted with passion in Lutyens' Delhi.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Instagram" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="YouTube" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" aria-label="TripAdvisor" class="social-icon"><i class="fa-brands fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h5>Navigation</h5>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#about">Our Story</a></li>
+                        <li><a href="#menu">Imperial Menu</a></li>
+                        <li><a href="#experience">The Experience</a></li>
+                        <li><a href="#reservations">Reservations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h5>Experiences</h5>
+                    <ul>
+                        <li><a href="#menu">Royal Tasting Banquet</a></li>
+                        <li><a href="#experience">Sommelier Cellar</a></li>
+                        <li><a href="#reservations">Maharaja Table Booking</a></li>
+                        <li><a href="#contact">Private Dastarkhwans</a></li>
+                        <li><a href="#menu">Artisanal Shahi Elixirs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h5>Accolades</h5>
+                    <ul class="accolades-list">
+                        <li><i class="fa-solid fa-star text-gold"></i> 3 Michelin Stars (2024–2026)</li>
+                        <li><i class="fa-solid fa-star text-gold"></i> Asia's 50 Best Distinction</li>
+                        <li><i class="fa-solid fa-star text-gold"></i> World's 50 Best Discovery</li>
+                        <li><i class="fa-solid fa-star text-gold"></i> Grand Award Wine Spectator</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SAVORIA Haute Cuisine India Pvt. Ltd. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Service</a>
+                    <span>•</span>
+                    <a href="#">Accessibility</a>
+                    <span>•</span>
+                    <a href="kitchen-orders.html" target="_blank" title="Internal Kitchen Staff Portal"><i class="fa-solid fa-kitchen-set"></i> Kitchen Line</a>
+                    <span>•</span>
+                    <a href="admin.html" target="_blank" title="Owner Admin Management Portal" style="color: var(--color-gold); font-weight: 600;"><i class="fa-solid fa-shield-halved"></i> Owner Portal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-Out Cart Drawer -->
+    <div class="cart-drawer-backdrop" id="cartDrawerBackdrop">
+        <aside class="cart-drawer" id="cartDrawer" aria-label="Dining Cart Drawer">
+            <div class="cart-drawer-header">
+                <div class="cart-header-title">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <h3>Your Artisanal Order</h3>
+                </div>
+                <button class="cart-close-btn" id="closeCartBtn" aria-label="Close Cart">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="cart-items-list" id="cartItemsContainer">
+                <!-- Injected via app.js -->
+            </div>
+
+            <div class="cart-drawer-footer" id="cartFooter">
+                <!-- Tip Selector -->
+                <div class="cart-tip-section">
+                    <span class="cart-tip-label">Hospitality Gratuity:</span>
+                    <div class="cart-tip-buttons" id="tipButtons">
+                        <button class="tip-btn" data-tip="10">10%</button>
+                        <button class="tip-btn active" data-tip="12">12%</button>
+                        <button class="tip-btn" data-tip="15">15%</button>
+                        <button class="tip-btn" data-tip="0">Custom/0%</button>
+                    </div>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="cart-summary-breakdown">
+                    <div class="cart-sum-row">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal">₹0</span>
+                    </div>
+                    <div class="cart-sum-row">
+                        <span>Indian Restaurant GST (5%):</span>
+                        <span id="cartTax">₹0</span>
+                    </div>
+                    <div class="cart-sum-row">
+                        <span>Staff Gratuity:</span>
+                        <span id="cartTipAmount">₹0</span>
+                    </div>
+                    <div class="cart-sum-row cart-total-row">
+                        <span>Estimated Total:</span>
+                        <span id="cartTotal" class="text-gold">₹0</span>
+                    </div>
+                </div>
+
+                <a href="tray.html" class="btn btn-primary btn-full checkout-trigger-btn" id="proceedCheckoutBtn">
+                    <span>Proceed to Order Tray</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Takeout / Delivery Checkout Modal -->
+    <div class="modal-backdrop" id="checkoutModal" aria-hidden="true">
+        <div class="modal-dialog checkout-modal-dialog">
+            <button class="modal-close-btn" id="closeCheckoutModalBtn" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="checkout-modal-content">
+                <div class="checkout-header">
+                    <span class="section-tag">SAVORIA ROYAL SERVICE</span>
+                    <h3>Complete Your Culinary Order</h3>
+                    <p>Select royal chauffeur delivery or private valet pickup from 450 Heritage Marg</p>
+                </div>
+
+                <form id="checkoutForm" class="checkout-form">
+                    <div class="order-type-toggle">
+                        <label class="order-type-option active">
+                            <input type="radio" name="orderType" value="pickup" checked>
+                            <i class="fa-solid fa-store"></i>
+                            <span>Valet Pickup (30-40 min)</span>
+                        </label>
+                        <label class="order-type-option">
+                            <input type="radio" name="orderType" value="delivery">
+                            <i class="fa-solid fa-motorcycle"></i>
+                            <span>Royal Chauffeur Delivery</span>
+                        </label>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="coName">Full Name</label>
+                            <input type="text" id="coName" autocomplete="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="coPhone">Phone Number</label>
+                            <input type="tel" id="coPhone" autocomplete="tel" required>
+                        </div>
+                        <div class="form-group full-width" id="deliveryAddressGroup" style="display: none;">
+                            <label for="coAddress">Delivery Street Address (Delhi NCR / Lutyens' Zone)</label>
+                            <input type="text" id="coAddress" placeholder="Bungalow / Apartment, Street, City, PIN">
+                        </div>
+                        <div class="form-group">
+                            <label for="coTime">Pickup / Delivery Time</label>
+                            <select id="coTime">
+                                <option value="asap">As soon as prepared (~35 min)</option>
+                                <option value="19:00">Tonight at 7:00 PM</option>
+                                <option value="20:00">Tonight at 8:00 PM</option>
+                                <option value="21:00">Tonight at 9:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="coPayment">Payment Method</label>
+                            <select id="coPayment">
+                                <option value="upi">UPI / Instant QR Pay</option>
+                                <option value="card">RuPay / Credit Card on File</option>
+                                <option value="concierge">Maharaja House Account</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="checkout-order-summary-box" id="checkoutOrderSummaryBox">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Authorize & Place Order</span>
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Visual Floor Plan Modal -->
+    <div class="modal-backdrop" id="floorPlanModal" aria-hidden="true">
+        <div class="modal-dialog floorplan-modal-dialog">
+            <button class="modal-close-btn" id="closeFloorPlanBtn" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="floorplan-content">
+                <div class="floorplan-header">
+                    <span class="section-tag">SAVORIA ROYAL SEATING MAP</span>
+                    <h3>Select Your Specific Table</h3>
+                    <p>Click any available table to reserve that exact royal position for your evening.</p>
+                </div>
+
+                <!-- Legend -->
+                <div class="floorplan-legend">
+                    <div class="legend-item"><span class="legend-dot available"></span> Available</div>
+                    <div class="legend-item"><span class="legend-dot selected"></span> Selected Table</div>
+                    <div class="legend-item"><span class="legend-dot occupied"></span> Reserved Tonight</div>
+                </div>
+
+                <!-- Interactive Floor Layout Diagram -->
+                <div class="floor-layout-container">
+                    <!-- Zone 1: Main Crystal Dining Room -->
+                    <div class="layout-zone zone-crystal">
+                        <div class="zone-title"><i class="fa-solid fa-gem"></i> The Grand Durbar Hall</div>
+                        <div class="tables-cluster">
+                            <div class="table-node" data-table="T-01" data-zone="The Grand Durbar Hall" data-seats="2" data-status="available">
+                                <span class="table-num">T-01</span>
+                                <span class="table-capacity">2 seats (Center)</span>
+                            </div>
+                            <div class="table-node occupied" data-table="T-02" data-zone="The Grand Durbar Hall" data-seats="4" data-status="occupied">
+                                <span class="table-num">T-02</span>
+                                <span class="table-capacity">4 seats (Reserved)</span>
+                            </div>
+                            <div class="table-node" data-table="T-03" data-zone="The Grand Durbar Hall" data-seats="2" data-status="available">
+                                <span class="table-num">T-03</span>
+                                <span class="table-capacity">2 seats (Jharokha View)</span>
+                            </div>
+                            <div class="table-node" data-table="T-04" data-zone="The Grand Durbar Hall" data-seats="6" data-status="available">
+                                <span class="table-num">T-04</span>
+                                <span class="table-capacity">6 seats (Royal Booth)</span>
+                            </div>
+                            <div class="table-node" data-table="T-05" data-zone="The Grand Durbar Hall" data-seats="4" data-status="available">
+                                <span class="table-num">T-05</span>
+                                <span class="table-capacity">4 seats (Chandelier)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zone 2: Garden Terrace Pergola -->
+                    <div class="layout-zone zone-terrace">
+                        <div class="zone-title"><i class="fa-solid fa-tree"></i> Royal Jharokha Pergola</div>
+                        <div class="tables-cluster">
+                            <div class="table-node" data-table="G-01" data-zone="Royal Jharokha Pergola" data-seats="2" data-status="available">
+                                <span class="table-num">G-01</span>
+                                <span class="table-capacity">2 seats (Fountain)</span>
+                            </div>
+                            <div class="table-node occupied" data-table="G-02" data-zone="Royal Jharokha Pergola" data-seats="4" data-status="occupied">
+                                <span class="table-num">G-02</span>
+                                <span class="table-capacity">4 seats (Reserved)</span>
+                            </div>
+                            <div class="table-node" data-table="G-03" data-zone="Royal Jharokha Pergola" data-seats="4" data-status="available">
+                                <span class="table-num">G-03</span>
+                                <span class="table-capacity">4 seats (Embers Hearth)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zone 3: Chef's Counter & Cellar -->
+                    <div class="layout-zone zone-chef-cellar">
+                        <div class="zone-title"><i class="fa-solid fa-fire-burner"></i> Ustad's Open Tandoor & Vault</div>
+                        <div class="tables-cluster">
+                            <div class="table-node" data-table="CC-01" data-zone="Ustad's Open Tandoor Counter" data-seats="1" data-status="available">
+                                <span class="table-num">CC-01</span>
+                                <span class="table-capacity">1-2 seats (Counter)</span>
+                            </div>
+                            <div class="table-node" data-table="CC-02" data-zone="Ustad's Open Tandoor Counter" data-seats="2" data-status="available">
+                                <span class="table-num">CC-02</span>
+                                <span class="table-capacity">2 seats (Counter)</span>
+                            </div>
+                            <div class="table-node" data-table="WC-VIP" data-zone="Shahi Diwan Vault" data-seats="8" data-status="available">
+                                <span class="table-num">WC-VIP</span>
+                                <span class="table-capacity">Private Diwan (8-16)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="floorplan-footer">
+                    <div class="selected-table-info" id="selectedTableInfoText">
+                        <span>Selected: <strong>T-01 (The Grand Durbar Hall • 2 Seats)</strong></span>
+                    </div>
+                    <button class="btn btn-primary" id="confirmTableSelectionBtn">Confirm Selected Table</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sommelier Pairing Quiz Modal -->
+    <div class="modal-backdrop" id="quizModal" aria-hidden="true">
+        <div class="modal-dialog quiz-modal-dialog">
+            <button class="modal-close-btn" id="closeQuizModalBtn" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="quiz-content">
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="quizProgressFill" style="width: 33%;"></div>
+                </div>
+
+                <div id="quizStepContainer">
+                    <!-- Steps injected dynamically via app.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Submission Modal -->
+    <div class="modal-backdrop" id="reviewModal" aria-hidden="true">
+        <div class="modal-dialog review-modal-dialog">
+            <button class="modal-close-btn" id="closeReviewModalBtn" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="review-modal-content">
+                <div class="review-form-header">
+                    <span class="section-tag">SHARE YOUR EXPERIENCE</span>
+                    <h3>Write a Diner Review</h3>
+                    <p>Tell the SAVORIA culinary team about your visit and dishes enjoyed.</p>
+                </div>
+
+                <form id="submitReviewForm" class="review-submit-form">
+                    <!-- Interactive 5-Star Rating Picker -->
+                    <div class="form-group star-rating-group">
+                        <label>Your Rating</label>
+                        <div class="star-rating-picker" id="starRatingPicker">
+                            <i class="fa-solid fa-star active" data-rating="1"></i>
+                            <i class="fa-solid fa-star active" data-rating="2"></i>
+                            <i class="fa-solid fa-star active" data-rating="3"></i>
+                            <i class="fa-solid fa-star active" data-rating="4"></i>
+                            <i class="fa-solid fa-star active" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" id="reviewRatingVal" value="5">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="revName">Your Name</label>
+                            <input type="text" id="revName" autocomplete="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="revTag">Dining Experience</label>
+                            <select id="revTag">
+                                <option value="Anniversary Dinner">Anniversary Dinner</option>
+                                <option value="Chef's Tasting Menu">Chef's Tasting Menu</option>
+                                <option value="Sommelier Cellar Experience">Sommelier Cellar Experience</option>
+                                <option value="Private Celebration">Private Celebration</option>
+                                <option value="Romantic Evening">Romantic Evening</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="revText">Your Review</label>
+                        <textarea id="revText" rows="4" placeholder="Share your dining experience..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Publish Review</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dish Details Modal -->
+    <div class="modal-backdrop" id="dishModal" aria-hidden="true">
+        <div class="modal-dialog dish-modal-dialog">
+            <button class="modal-close-btn" id="closeDishModalBtn" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="dish-modal-content" id="dishModalBody">
+                <!-- Injected dynamically via app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Reservation Confirmation Success Modal -->
+    <div class="modal-backdrop" id="reservationModal" aria-hidden="true">
+        <div class="modal-dialog res-modal-dialog">
+            <div class="res-success-content" id="resSuccessBody">
+                <div class="success-icon-circle">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3>Reservation Confirmed</h3>
+                <p class="success-lead">We look forward to hosting you at SAVORIA.</p>
+                <div class="confirmed-details-card" id="confirmedDetailsCard">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="closeResModalBtn">Done & Return</button>
+                    <button class="btn btn-secondary" id="addToCalBtn"><i class="fa-regular fa-calendar-plus"></i> Add to Calendar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Javascript Logic -->
+    <script src="app.js?v=3.5"></script>
+</body>
+</html>

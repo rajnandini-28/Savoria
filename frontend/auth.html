@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Authentication & Guest Sign In — SAVORIA Fine Dining</title>
+    <meta name="description" content="Sign in or create your SAVORIA Gastronomy membership to authorize orders, manage reservations, and access exclusive cellar tasting privileges.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-page-body">
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span class="badge-award"><i class="fa-solid fa-shield-halved"></i> 256-Bit Encrypted Member Portal</span>
+            <div class="top-bar-links">
+                <span class="live-status"><span class="pulse-dot"></span> Concierge Available 24/7</span>
+                <a href="tel:+91XXXXXXXXXX" class="top-phone"><i class="fa-solid fa-phone"></i> +91 XXXXX XXXXX</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="header" id="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-symbol">❖</span>
+                <div class="logo-text-group">
+                    <span class="logo-text">SAVORIA</span>
+                    <span class="logo-sub">HAUTE CUISINE</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="nav-link">Culinary Menu</a></li>
+                <li><a href="index.html#experience" class="nav-link">The Experience</a></li>
+                <li><a href="index.html#reservations" class="nav-link">Reservations</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Cart Pill -->
+                <a href="tray.html" class="cart-pill-btn" id="cartTriggerBtn" aria-label="View Dining Order Tray">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-pill-text">Order Tray</span>
+                    <span class="cart-badge" id="cartCountBadge">0</span>
+                </a>
+
+                <!-- User Account Dynamic Container -->
+                <div class="user-auth-nav-slot" id="userAuthNavSlot">
+                    <!-- Populated via app.js -->
+                </div>
+
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-content">
+            <ul class="mobile-links">
+                <li><a href="index.html#hero" class="mobile-link">Home</a></li>
+                <li><a href="index.html#about" class="mobile-link">Our Story</a></li>
+                <li><a href="index.html#menu" class="mobile-link">Culinary Menu</a></li>
+                <li><a href="tray.html" class="mobile-link">Order Tray</a></li>
+                <li><a href="auth.html" class="mobile-link active">Sign In / Register</a></li>
+                <li><a href="index.html#reservations" class="mobile-link">Reservations</a></li>
+                <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Auth Section -->
+    <main class="auth-main-section">
+        <div class="auth-bg-glow glow-1"></div>
+        <div class="auth-bg-glow glow-2"></div>
+
+        <div class="container auth-container">
+            <!-- Breadcrumbs -->
+            <nav class="dish-breadcrumbs" aria-label="Breadcrumbs">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <span>/</span>
+                <span class="active-crumb">Member Portal & Authentication</span>
+            </nav>
+
+            <div class="auth-card-wrapper">
+                <!-- Left: Connoisseur Club Privileges Card -->
+                <div class="auth-side-card">
+                    <div class="auth-side-header">
+                        <span class="badge-award"><i class="fa-solid fa-crown"></i> SAVORIA CONNOISSEUR</span>
+                        <h2>Exclusive Member Privileges</h2>
+                        <p>Join our private guest collective for seamless table reservations, live order dispatch tracking, and rare wine cellar allocations.</p>
+                    </div>
+
+                    <div class="auth-perks-list">
+                        <div class="auth-perk-item">
+                            <div class="perk-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                            <div>
+                                <h4>Instant Order Authorization</h4>
+                                <p>1-Click checkout with saved culinary preferences and fulfillment routing.</p>
+                            </div>
+                        </div>
+
+                        <div class="auth-perk-item">
+                            <div class="perk-icon"><i class="fa-solid fa-bell-concierge"></i></div>
+                            <div>
+                                <h4>Live Kitchen Dispatch Tracking</h4>
+                                <p>Real-time updates directly from Executive Chef Auguste Moreau's brigade line.</p>
+                            </div>
+                        </div>
+
+                        <div class="auth-perk-item">
+                            <div class="perk-icon"><i class="fa-solid fa-wine-glass"></i></div>
+                            <div>
+                                <h4>Private Sommelier Allocation</h4>
+                                <p>First access to limited-edition Grand Cru vintages and private cellar tastings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="auth-side-footer">
+                        <div class="side-stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Privacy Guaranteed</span>
+                        </div>
+                        <div class="side-stat">
+                            <span class="stat-number">35 min</span>
+                            <span class="stat-label">Avg. Preparation</span>
+                        </div>
+                        <div class="side-stat">
+                            <span class="stat-number">2-Star</span>
+                            <span class="stat-label">Michelin Standards</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Auth Form Container with Tabs -->
+                <div class="auth-form-card">
+                    <!-- Tab Switcher -->
+                    <div class="auth-tabs">
+                        <button type="button" class="auth-tab-btn active" id="tabSignInBtn" onclick="switchAuthTab('login')">
+                            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                        </button>
+                        <button type="button" class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">
+                            <i class="fa-solid fa-user-plus"></i> Create Membership
+                        </button>
+                    </div>
+
+                    <!-- Notice banner if redirected from checkout -->
+                    <div class="auth-checkout-prompt" id="authCheckoutPrompt" style="display: none;">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Please sign in or register to authorize and confirm your order tray.</span>
+                    </div>
+
+                    <!-- LOGIN FORM -->
+                    <form id="signInForm" class="auth-form" onsubmit="handleUserLogin(event)">
+                        <div class="auth-form-intro">
+                            <h3>Welcome Back to SAVORIA</h3>
+                            <p>Enter your connoisseur credentials to access your account.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginEmail"><i class="fa-regular fa-envelope"></i> Email Address</label>
+                            <input type="email" id="loginEmail" autocomplete="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="label-with-action">
+                                <label for="loginPassword"><i class="fa-solid fa-lock"></i> Password</label>
+                                <a href="javascript:void(0)" onclick="showToast('Password reset link sent to your email.', 'info')" class="forgot-pass-link">Forgot password?</a>
+                            </div>
+                            <input type="password" id="loginPassword" autocomplete="current-password" required>
+                        </div>
+
+                        <div class="form-options-row">
+                            <label class="remember-me-label">
+                                <input type="checkbox" id="rememberMe" checked>
+                                <span>Remember me on this device</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full auth-submit-btn">
+                            <span>Sign In & Continue</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <div class="quick-demo-login-box">
+                            <span>Demo 1-Click Access:</span>
+                            <button type="button" class="btn-demo-quick" onclick="fillDemoUser()">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Guest Demo Login
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- REGISTRATION FORM -->
+                    <form id="registerForm" class="auth-form" style="display: none;" onsubmit="handleUserRegister(event)">
+                        <div class="auth-form-intro">
+                            <h3>Create Guest Membership</h3>
+                            <p>Complete your profile for personalized culinary experiences.</p>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="regFullName"><i class="fa-regular fa-user"></i> Full Name</label>
+                                <input type="text" id="regFullName" autocomplete="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="regPhone"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Phone</label>
+                                <input type="tel" id="regPhone" autocomplete="tel" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regEmail"><i class="fa-regular fa-envelope"></i> Email Address</label>
+                            <input type="email" id="regEmail" autocomplete="email" required>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="regPassword"><i class="fa-solid fa-lock"></i> Password</label>
+                                <input type="password" id="regPassword" autocomplete="new-password" minlength="6" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="regConfirmPassword"><i class="fa-solid fa-shield-check"></i> Confirm Password</label>
+                                <input type="password" id="regConfirmPassword" autocomplete="new-password" minlength="6" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regDietaryPref"><i class="fa-solid fa-seedling"></i> Dietary Preference (Optional)</label>
+                            <select id="regDietaryPref">
+                                <option value="None">No Specific Dietary Restrictions</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Gluten-Free">Gluten-Free</option>
+                                <option value="Seafood Only">Pescatarian / Seafood</option>
+                                <option value="Chef's Choice">Chef's Tasting Omnivore</option>
+                            </select>
+                        </div>
+
+                        <div class="form-options-row">
+                            <label class="remember-me-label">
+                                <input type="checkbox" id="regTerms" required>
+                                <span>I agree to the SAVORIA Membership Terms & Privacy Policy</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full auth-submit-btn">
+                            <span>Register & Authorize</span>
+                            <i class="fa-solid fa-crown"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Global Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript Application Logic -->
+    <script src="app.js?v=3.0"></script>
+</body>
+</html>

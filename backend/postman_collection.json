@@ -1,0 +1,388 @@
+{
+  "info": {
+    "_postman_id": "c71a39f0-8c90-4c12-92da-e8549921c5f3",
+    "name": "SAVORIA Royal Fine Dining & Gastronomy API",
+    "description": "Complete production REST API collection for SAVORIA Fine Dining with JWT Authentication, Table Reservations with Dual Email Dispatch (Guest & Admin), Order Processing, Contact Desk, and Reviews.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register New Patron",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rajnandini Bhati\",\n  \"email\": \"rajnandini@example.com\",\n  \"phone\": \"+91 99820 72287\",\n  \"password\": \"RoyalSecret123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Create a new user account with hashed password and receive a JWT token."
+          },
+          "response": []
+        },
+        {
+          "name": "Login Patron / Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "    pm.environment.set(\"jwt_token\", jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"rajnandini@example.com\",\n  \"password\": \"RoyalSecret123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Authenticate user credentials and retrieve JWT bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Profile (Protected)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "profile"]
+            },
+            "description": "Fetch the currently authenticated user profile using Bearer token."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Reservations (Dual Email)",
+      "item": [
+        {
+          "name": "Create Table Reservation (Dispatches Dual Email)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Rajnandini Bhati\",\n  \"email\": \"mkd9a32@gmail.com\",\n  \"phone\": \"9982072287\",\n  \"guests\": 4,\n  \"guestsText\": \"4 Royal Guests\",\n  \"date\": \"2026-09-25\",\n  \"formattedDate\": \"Friday, 25 September 2026\",\n  \"time\": \"20:00\",\n  \"timeText\": \"8:00 PM (Dinner Grandeur)\",\n  \"seating\": \"The Durbar Hall\",\n  \"occasion\": \"Anniversary Celebration\",\n  \"specialNotes\": \"Please arrange rose petal welcome and candlelit table.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reservations",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reservations"]
+            },
+            "description": "Submits a royal table reservation. Automatically sends Email #1 (Gold Luxury Invitation) to Guest and Email #2 (Booking Alert) to Admin/Owner."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Reservations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reservations",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reservations"]
+            },
+            "description": "Retrieve all table bookings."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Reservation by Reference Code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reservations/SAV-IND-522019",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reservations", "SAV-IND-522019"]
+            },
+            "description": "Fetch details of a single reservation by booking reference."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Reservation Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"seated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reservations/SAV-IND-522019/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reservations", "SAV-IND-522019", "status"]
+            },
+            "description": "Update reservation status (confirmed, seated, completed, cancelled)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Contact & Concierge (Dual Email)",
+      "item": [
+        {
+          "name": "Submit Contact Inquiry (Dual Email)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rajnandini Bhati\",\n  \"email\": \"mkd9a32@gmail.com\",\n  \"phone\": \"9982072287\",\n  \"subject\": \"Private Shahi Diwan Dining Inquiry\",\n  \"message\": \"We would like to book the exclusive Shahi Diwan for an intimate family gathering of 12 guests next month.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/contact",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact"]
+            },
+            "description": "Submits an inquiry to the concierge. Automatically dispatches acknowledgment receipt to guest and alert to Admin/Owner."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Contact Inquiries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/contact",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact"]
+            },
+            "description": "Retrieve all guest inquiries submitted to the concierge desk."
+          },
+          "response": []
+        },
+        {
+          "name": "Subscribe to Royal Newsletter",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patron@savoria.in\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/contact/newsletter",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact", "newsletter"]
+            },
+            "description": "Subscribe an email to the Royal Gastronomy Gazette."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Orders & Kitchen Display System",
+      "item": [
+        {
+          "name": "Create Dining / Delivery Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"Rajnandini Bhati\",\n  \"phone\": \"9982072287\",\n  \"email\": \"mkd9a32@gmail.com\",\n  \"orderType\": \"Dine-In Royal Service\",\n  \"tableNumber\": \"Table T-01\",\n  \"items\": [\n    {\n      \"id\": \"awadhi-nalli-nihari\",\n      \"title\": \"Royal Awadhi Nalli Nihari\",\n      \"price\": 1450,\n      \"quantity\": 2\n    },\n    {\n      \"id\": \"kesar-shahi-tukda\",\n      \"title\": \"Kesar Shahi Tukda with 24K Gold Leaf\",\n      \"price\": 650,\n      \"quantity\": 2\n    }\n  ],\n  \"subtotal\": 4200,\n  \"gst\": 210,\n  \"tip\": 400,\n  \"total\": 4810,\n  \"paymentMethod\": \"UPI Instant Pay\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Submit a real-time order directly to the kitchen display line."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Kitchen Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/orders",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Fetch all live kitchen orders and statuses."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Order Kitchen Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Ready for Service / Dispatch\",\n  \"station\": \"Station 1 (Tandoor & Bhatti Brigade)\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/ORD-782190/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders", "ORD-782190", "status"]
+            },
+            "description": "Update live preparation status on the Kitchen Display System."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Reviews & Testimonials",
+      "item": [
+        {
+          "name": "Get All Reviews",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reviews",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reviews"]
+            },
+            "description": "Fetch verified guest reviews and degustation ratings."
+          },
+          "response": []
+        },
+        {
+          "name": "Submit Guest Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"author\": \"Rajnandini Bhati\",\n  \"title\": \"Splendid Royal Experience\",\n  \"rating\": 5,\n  \"dish\": \"Royal Awadhi Nalli Nihari & Saffron Sheermal\",\n  \"comment\": \"The marrow bone was impeccably tender and the cardamom rose notes in the Sheermal were perfection. Will visit again!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reviews",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reviews"]
+            },
+            "description": "Post a verified dining review."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "6. Health & Metrics",
+      "item": [
+        {
+          "name": "System Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health"]
+            },
+            "description": "Verify API server uptime and environment configuration."
+          },
+          "response": []
+        },
+        {
+          "name": "Restaurant Operational Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "stats"]
+            },
+            "description": "Fetch live operational counts for active orders, revenue, and reservations."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "jwt_token",
+      "value": ""
+    }
+  ]
+}

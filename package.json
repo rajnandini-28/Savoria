@@ -1,0 +1,30 @@
+{
+  "name": "savoria-restaurant-website",
+  "version": "1.0.0",
+  "description": "SAVORIA — Haute Cuisine & Artisanal Gastronomy Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "node backend/server.js",
+    "start": "node backend/server.js",
+    "serve": "node backend/server.js"
+  },
+  "keywords": [
+    "restaurant",
+    "fine-dining",
+    "food",
+    "gastronomy",
+    "wine-cellar"
+  ],
+  "author": "SAVORIA",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.10.1",
+    "nodemailer": "^10.0.10",
+    "razorpay": "^2.9.8"
+  }
+}
