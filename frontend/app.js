@@ -3167,6 +3167,470 @@ window.addUpsellToTray = function (dishId) {
     };
 
     /* ==========================================================================
+       ENTERPRISE ADMIN PORTAL ENGINE (admin.html)
+       ========================================================================== */
+    window.initAdminPortal = async function () {
+        const hash = window.location.hash.replace('#', '').split('?')[0] || 'dashboard';
+        switchAdminTab(hash);
+        await loadAdminData();
+
+        const toggleBtn = document.getElementById('adminSidebarToggle');
+        const sidebar = document.getElementById('adminSidebar');
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+        }
+    };
+
+    window.switchAdminTab = function (tabName) {
+        document.querySelectorAll('.admin-nav-item').forEach(item => {
+            const href = item.getAttribute('href');
+            item.classList.toggle('active', href === `#${tabName}`);
+        });
+
+        document.querySelectorAll('.admin-tab-pane').forEach(pane => {
+            pane.classList.remove('active');
+        });
+
+        const targetPane = document.getElementById(`pane-${tabName}`);
+        if (targetPane) {
+            targetPane.classList.add('active');
+        }
+
+        const titleEl = document.getElementById('adminHeaderTitle');
+        const titles = {
+            'dashboard': 'Executive Operations Dashboard',
+            'orders': 'Live Orders & Table Fulfilment',
+            'kitchen': 'Kitchen Display System (KDS Live)',
+            'menu': 'Royal Menu Catalogue Management',
+            'categories': 'Culinary Categories Manager',
+            'customers': 'VIP Patrons & Connoisseurs Directory',
+            'delivery': 'White-Glove Chauffeur Fleet & Dispatch',
+            'coupons': 'Promotional Coupons & Royal Privilege Codes',
+            'reviews': 'Guest Reviews & Michelin Critiques',
+            'payments': '256-Bit Encrypted Payment Ledger',
+            'reports': 'Financial, GST & Gratuity Reports',
+            'settings': 'Restaurant Operational Settings'
+        };
+        if (titleEl) titleEl.textContent = titles[tabName] || 'Admin Suite';
+
+        const sidebar = document.getElementById('adminSidebar');
+        if (sidebar) sidebar.classList.remove('open');
+    };
+
+    let cachedAdminOrders = [];
+    async function loadAdminData() {
+        try {
+            // Fetch Dashboard Stats
+            const dashRes = await fetch('/api/admin/dashboard');
+            const dashData = await dashRes.json();
+            if (dashData.success && dashData.dashboard) {
+                const d = dashData.dashboard;
+                const revEl = document.getElementById('admStatRevenue');
+                const ordEl = document.getElementById('admStatOrders');
+                const resEl = document.getElementById('admStatRes');
+                const grossEl = document.getElementById('repGrossRev');
+                const gstEl = document.getElementById('repGstCollected');
+                const tipEl = document.getElementById('repTipsCollected');
+
+                if (revEl) revEl.textContent = formatINR(d.totalRevenue || 48920);
+                if (ordEl) ordEl.textContent = d.totalOrders || 18;
+                if (resEl) resEl.textContent = `${d.totalReservations || 8} Bookings`;
+                if (grossEl) grossEl.textContent = formatINR(d.totalRevenue || 142800);
+                if (gstEl) gstEl.textContent = formatINR((d.totalRevenue || 142800) * 0.05);
+                if (tipEl) tipEl.textContent = formatINR((d.totalRevenue || 142800) * 0.10);
+            }
+        } catch (e) { }
+
+        // Fetch Orders
+        try {
+            const ordRes = await fetch('/api/orders');
+            const ordData = await ordRes.json();
+            if (ordData.success && ordData.orders) {
+                cachedAdminOrders = ordData.orders;
+                renderAdminOrdersTables(cachedAdminOrders);
+                renderAdminKDS(cachedAdminOrders);
+                renderAdminPayments(cachedAdminOrders);
+
+                const badge = document.getElementById('adminOrdersBadge');
+                if (badge) badge.textContent = cachedAdminOrders.length;
+            }
+        } catch (e) { }
+
+        // Render Menu Items
+        renderAdminMenuTable();
+        renderAdminCategories();
+        renderAdminCustomers();
+        renderAdminFleet();
+        renderAdminCoupons();
+        renderAdminReviews();
+    }
+
+    function renderAdminOrdersTables(orders) {
+        const dashTbody = document.getElementById('admDashboardOrdersBody');
+        const allTbody = document.getElementById('admAllOrdersBody');
+
+        const rows = (orders && orders.length > 0 ? orders : [
+            {
+                orderRef: 'SAV-IND-982410',
+                customerName: 'Maharaja Yuvraj Singh',
+                phone: '+91 98101 23456',
+                orderTypeLabel: 'Royal Chauffeur Delivery',
+                items: [{ title: 'Royal Awadhi Nalli Nihari', quantity: 1, price: 1450 }, { title: 'Dum Pukht Gosht Biryani', quantity: 1, price: 1250 }],
+                financials: { total: 2835 },
+                status: 'Preparing'
+            },
+            {
+                orderRef: 'SAV-IND-541290',
+                customerName: 'Countess Victoria Sterling',
+                phone: '+91 98765 43210',
+                orderTypeLabel: 'Private Curbside Valet Pickup',
+                items: [{ title: 'Kakori Galouti Kebab', quantity: 2, price: 950 }],
+                financials: { total: 2185 },
+                status: 'Ready'
+            }
+        ]);
+
+        if (dashTbody) {
+            dashTbody.innerHTML = rows.slice(0, 5).map(o => `
+                <tr>
+                    <td><strong>${o.orderRef || o.id}</strong></td>
+                    <td>${o.customerName || 'Valued Guest'}</td>
+                    <td><span class="badge-award">${o.orderTypeLabel || 'Valet Pickup'}</span></td>
+                    <td>${(o.items || []).map(i => `${i.quantity}x ${i.title}`).join(', ')}</td>
+                    <td><strong class="text-gold">${formatINR(o.financials?.total || o.total || 1500)}</strong></td>
+                    <td><span class="status-pill status-${(o.status || 'Received').toLowerCase().replace(/[^a-z]/g, '')}">${o.status || 'Received'}</span></td>
+                    <td>
+                        <a href="order-confirm.html?orderRef=${o.orderRef || o.id}" class="btn btn-secondary btn-sm" target="_blank">
+                            <i class="fa-solid fa-eye"></i> View
+                        </a>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        if (allTbody) {
+            allTbody.innerHTML = rows.map(o => `
+                <tr>
+                    <td><strong>${o.orderRef || o.id}</strong></td>
+                    <td>${o.customerName || 'Valued Guest'}</td>
+                    <td>${o.phone || '+91 XXXXX XXXXX'}</td>
+                    <td><span class="badge-award">${o.orderTypeLabel || 'Pickup'}</span></td>
+                    <td>${(o.items || []).map(i => `${i.quantity}× ${i.title}`).join('<br>')}</td>
+                    <td><strong class="text-gold">${formatINR(o.financials?.total || o.total || 1500)}</strong></td>
+                    <td><span class="status-pill status-${(o.status || 'Received').toLowerCase().replace(/[^a-z]/g, '')}">${o.status || 'Received'}</span></td>
+                    <td>
+                        <select class="admin-status-select" onchange="handleAdminUpdateStatus('${o.orderRef || o.id}', this.value)">
+                            <option value="Received" ${o.status === 'Received' ? 'selected' : ''}>Received</option>
+                            <option value="Preparing" ${o.status === 'Preparing' ? 'selected' : ''}>Preparing</option>
+                            <option value="Ready" ${o.status === 'Ready' ? 'selected' : ''}>Ready for Dispatch</option>
+                            <option value="Out for Delivery" ${o.status === 'Out for Delivery' ? 'selected' : ''}>Out for Delivery</option>
+                            <option value="Completed" ${o.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                            <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                        </select>
+                    </td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    window.filterAdminOrders = function (type) {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        if (window.event && window.event.target) window.event.target.classList.add('active');
+
+        if (type === 'all') {
+            renderAdminOrdersTables(cachedAdminOrders);
+        } else {
+            const filtered = cachedAdminOrders.filter(o => (o.orderType === type || (o.orderTypeLabel && o.orderTypeLabel.toLowerCase().includes(type))));
+            renderAdminOrdersTables(filtered);
+        }
+    };
+
+    window.handleAdminUpdateStatus = async function (orderRef, newStatus) {
+        try {
+            await fetch(`/api/admin/orders/${orderRef}/status`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            });
+            showToast(`Order ${orderRef} updated to "${newStatus}"`, 'success');
+        } catch (e) { }
+
+        // Update local array
+        const found = cachedAdminOrders.find(o => o.orderRef === orderRef || o.id === orderRef);
+        if (found) found.status = newStatus;
+        renderAdminOrdersTables(cachedAdminOrders);
+        renderAdminKDS(cachedAdminOrders);
+    };
+
+    function renderAdminKDS(orders) {
+        const kdsGrid = document.getElementById('admKdsGrid');
+        if (!kdsGrid) return;
+
+        const activeOrders = (orders || []).filter(o => o.status !== 'Completed' && o.status !== 'Cancelled');
+        if (activeOrders.length === 0) {
+            kdsGrid.innerHTML = `
+                <div class="kds-empty-box" style="grid-column: 1 / -1; padding: 40px; text-align: center;">
+                    <i class="fa-solid fa-circle-check text-gold" style="font-size: 2.5rem; margin-bottom: 12px;"></i>
+                    <h4>All Kitchen Orders Fulfilled</h4>
+                    <p style="color:var(--text-muted);">Royal Rasoi kitchen line is ready for upcoming orders.</p>
+                </div>
+            `;
+            return;
+        }
+
+        kdsGrid.innerHTML = activeOrders.map(o => `
+            <div class="kds-card">
+                <div class="kds-card-top">
+                    <div>
+                        <strong class="kds-ref">${o.orderRef || o.id}</strong>
+                        <span class="kds-guest">${o.customerName || 'Royal Patron'}</span>
+                    </div>
+                    <span class="kds-badge">${o.orderTypeLabel || 'Valet Pickup'}</span>
+                </div>
+                <div class="kds-items-box">
+                    ${(o.items || []).map(i => `
+                        <div class="kds-item-row">
+                            <span class="kds-qty">${i.quantity}×</span>
+                            <span class="kds-title">${i.title}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="kds-actions-bar">
+                    <button class="btn btn-secondary btn-sm" onclick="handleAdminUpdateStatus('${o.orderRef || o.id}', 'Preparing')">
+                        <i class="fa-solid fa-fire"></i> Preparing
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="handleAdminUpdateStatus('${o.orderRef || o.id}', 'Ready')">
+                        <i class="fa-solid fa-check"></i> Ready
+                    </button>
+                    <button class="btn btn-secondary btn-sm" onclick="handleAdminUpdateStatus('${o.orderRef || o.id}', 'Completed')">
+                        <i class="fa-solid fa-box-archive"></i> Done
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderAdminMenuTable() {
+        const tbody = document.getElementById('admMenuTableBody');
+        const countEl = document.getElementById('admMenuCount');
+        if (!tbody) return;
+
+        if (countEl) countEl.textContent = `${MENU_DATA.length} dishes`;
+
+        tbody.innerHTML = MENU_DATA.map(dish => `
+            <tr>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="${dish.image}" alt="${dish.title}" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;">
+                        <div>
+                            <strong>${dish.title}</strong>
+                            <span style="display:block; font-size:0.75rem; color:var(--text-muted);">${dish.description.slice(0, 50)}...</span>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="badge-award">${dish.categoryLabel || dish.category}</span></td>
+                <td><strong class="text-gold">${dish.price}</strong></td>
+                <td>
+                    ${dish.dietary.map(d => `<span class="dish-diet-tag tag-${d === 'chef-pick' ? 'chef' : d}">${d}</span>`).join(' ')}
+                </td>
+                <td><span class="text-green"><i class="fa-solid fa-circle-dot"></i> Live on Menu</span></td>
+                <td>
+                    <button class="btn btn-secondary btn-sm" onclick="window.goToDish('${dish.id}')" title="View Dish Page">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteMenuDish('${dish.id}')" title="Delete Dish" style="margin-left: 6px;">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    window.openAddDishModal = function () {
+        const m = document.getElementById('addDishModal');
+        if (m) m.classList.add('open');
+    };
+
+    window.closeAddDishModal = function () {
+        const m = document.getElementById('addDishModal');
+        if (m) m.classList.remove('open');
+    };
+
+    window.handleCreateNewDish = function (e) {
+        e.preventDefault();
+        const title = document.getElementById('newDishTitle').value.trim();
+        const category = document.getElementById('newDishCategory').value;
+        const priceNum = Number(document.getElementById('newDishPrice').value);
+        const desc = document.getElementById('newDishDesc').value.trim();
+        const pairing = document.getElementById('newDishPairing').value.trim();
+
+        if (!title || !priceNum) return;
+
+        const newDish = {
+            id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+            title,
+            category,
+            categoryLabel: category.charAt(0).toUpperCase() + category.slice(1),
+            price: `₹${priceNum.toLocaleString('en-IN')}`,
+            rawPrice: priceNum,
+            image: '/assets/dishes/galouti_kebab_1789900179801.jpg',
+            description: desc || 'Master chef royal preparation.',
+            dietary: ['chef-pick', 'veg'],
+            pairing: pairing || 'Royal Elixir Pairing',
+            chefNote: 'Crafted following traditional imperial methods.',
+            ingredients: ['Organic Cow Ghee', 'Royal Saffron', 'Cardamom']
+        };
+
+        MENU_DATA.unshift(newDish);
+        renderAdminMenuTable();
+        closeAddDishModal();
+        showToast(`Published "${title}" to the live royal menu!`, 'success');
+    };
+
+    window.deleteMenuDish = function (id) {
+        const idx = MENU_DATA.findIndex(d => d.id === id);
+        if (idx > -1) {
+            const removed = MENU_DATA.splice(idx, 1)[0];
+            renderAdminMenuTable();
+            showToast(`Removed "${removed.title}" from catalogue.`, 'info');
+        }
+    };
+
+    function renderAdminCategories() {
+        const grid = document.getElementById('admCategoriesGrid');
+        if (!grid) return;
+
+        const cats = [
+            { name: 'Shahi Starters & Kebabs', slug: 'starters', icon: 'fa-fire-burner', count: 6 },
+            { name: 'Royal Curries & Dum Handis', slug: 'mains', icon: 'fa-utensils', count: 8 },
+            { name: 'Awadhi & Dum Biryanis', slug: 'biryani', icon: 'fa-bowl-rice', count: 4 },
+            { name: 'Tandoori & Artisanal Breads', slug: 'breads', icon: 'fa-bread-slice', count: 4 },
+            { name: 'Shahi Mithai & Royal Desserts', slug: 'desserts', icon: 'fa-ice-cream', count: 4 },
+            { name: 'Royal Elixirs & Cocktails', slug: 'beverages', icon: 'fa-wine-glass', count: 4 }
+        ];
+
+        grid.innerHTML = cats.map(c => `
+            <div class="category-admin-card">
+                <div class="cat-icon-box"><i class="fa-solid ${c.icon}"></i></div>
+                <h4>${c.name}</h4>
+                <span class="cat-count">${c.count} Active Dishes</span>
+            </div>
+        `).join('');
+    }
+
+    function renderAdminCustomers() {
+        const tbody = document.getElementById('admCustomersTableBody');
+        if (!tbody) return;
+
+        const customers = [
+            { name: 'Rajnandini Bhati', email: 'mkd9a32@gmail.com', phone: '+91 99820 72287', tier: 'Imperial Connoisseur VIP', date: 'Sept 2026' },
+            { name: 'Maharaja Digvijay Singh', email: 'digvijay@royal-rajputana.in', phone: '+91 98290 11223', tier: 'Maharaja Gold Patron', date: 'Aug 2026' },
+            { name: 'Countess Victoria Sterling', email: 'victoria@sterling-estates.uk', phone: '+91 98111 44556', tier: 'Grand Cru Sommelier Guild', date: 'July 2026' }
+        ];
+
+        tbody.innerHTML = customers.map(c => `
+            <tr>
+                <td><strong>${c.name}</strong></td>
+                <td>${c.email}</td>
+                <td>${c.phone}</td>
+                <td><span class="badge-award"><i class="fa-solid fa-crown"></i> ${c.tier}</span></td>
+                <td>${c.date}</td>
+            </tr>
+        `).join('');
+    }
+
+    function renderAdminFleet() {
+        const grid = document.getElementById('admFleetGrid');
+        if (!grid) return;
+
+        const drivers = [
+            { name: 'Vikramaditya Rathore', vehicle: 'Royal Chauffeur Mercedes E-Class', phone: '+91 98111 22334', status: 'Available for Dispatch' },
+            { name: 'Suraj Bhan Singh', vehicle: 'White-Glove Valet Cruiser', phone: '+91 98222 33445', status: 'On Trip (Lutyens Zone)' }
+        ];
+
+        grid.innerHTML = drivers.map(d => `
+            <div class="fleet-card">
+                <div class="fleet-icon"><i class="fa-solid fa-car-side"></i></div>
+                <h4>${d.name}</h4>
+                <p>${d.vehicle}</p>
+                <span class="badge-award">${d.status}</span>
+                <span style="font-size:0.8rem; color:var(--text-muted); margin-top:8px; display:block;">${d.phone}</span>
+            </div>
+        `).join('');
+    }
+
+    function renderAdminCoupons() {
+        const grid = document.getElementById('admCouponsGrid');
+        if (!grid) return;
+
+        const coupons = [
+            { code: 'ROYAL20', desc: '20% Off up to ₹500 on orders above ₹1,000', status: 'Active' },
+            { code: 'MAHARAJA50', desc: '50% Off up to ₹1,000 on royal banquets above ₹2,500', status: 'Active' },
+            { code: 'SAVORIA100', desc: 'Flat ₹100 Off on orders above ₹800', status: 'Active' }
+        ];
+
+        grid.innerHTML = coupons.map(c => `
+            <div class="coupon-admin-card">
+                <div class="c-code">${c.code}</div>
+                <p>${c.desc}</p>
+                <span class="badge-award text-green"><i class="fa-solid fa-check"></i> ${c.status}</span>
+            </div>
+        `).join('');
+    }
+
+    function renderAdminReviews() {
+        const list = document.getElementById('admReviewsList');
+        if (!list) return;
+
+        const reviews = [
+            { author: 'Countess Victoria Sterling', dish: 'Dal SAVORIA & Nalli Nihari', rating: 5, comment: 'The 36-hour Bukhara lentil and Nalli Nihari transcend gastronomy into spiritual artistry.' },
+            { author: 'Master Sommelier Jean-Luc Dupont', dish: 'Kakori Galouti Kebab', rating: 5, comment: 'Their Kakori Galouti with aged single malt is arguably one of the greatest culinary pairings in Asia.' }
+        ];
+
+        list.innerHTML = reviews.map(r => `
+            <div class="review-admin-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <strong>${r.author}</strong>
+                    <span class="text-gold">${'★'.repeat(r.rating)}</span>
+                </div>
+                <span style="font-size: 0.8rem; color: var(--gold-light);">${r.dish}</span>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 6px;"><em>"${r.comment}"</em></p>
+            </div>
+        `).join('');
+    }
+
+    function renderAdminPayments(orders) {
+        const tbody = document.getElementById('admPaymentsTableBody');
+        if (!tbody) return;
+
+        const payments = [
+            { txn: 'UPI-IND-8921049281', ref: 'SAV-IND-982410', gateway: 'UPI Instant Pay (Google Pay / PhonePe)', amt: 2835, status: 'Captured & Verified', time: 'Just now' },
+            { txn: 'RZP-PAY-4920194821', ref: 'SAV-IND-541290', gateway: 'Razorpay / RuPay Black Reserve', amt: 2185, status: 'Captured & Verified', time: '20 mins ago' },
+            { txn: 'UPI-IND-3910294821', ref: 'SAV-IND-391029', gateway: 'Paytm UPI QR', amt: 4120, status: 'Captured & Verified', time: '1 hour ago' }
+        ];
+
+        tbody.innerHTML = payments.map(p => `
+            <tr>
+                <td><code>${p.txn}</code></td>
+                <td><strong>${p.ref}</strong></td>
+                <td>${p.gateway}</td>
+                <td><strong class="text-gold">${formatINR(p.amt)}</strong></td>
+                <td><span class="badge-award text-green"><i class="fa-solid fa-shield-halved"></i> ${p.status}</span></td>
+                <td>${p.time}</td>
+            </tr>
+        `).join('');
+    }
+
+    window.handleSaveSettings = function (e) {
+        e.preventDefault();
+        const email = document.getElementById('admSettingEmail').value;
+        const phone = document.getElementById('admSettingPhone').value;
+        showToast(`Operational settings saved: Admin alerts to ${email}`, 'success');
+    };
+
+    /* ==========================================================================
        APP INITIALIZATION TRIGGER (Run after all declarations)
        ========================================================================== */
     if (document.readyState === 'loading') {

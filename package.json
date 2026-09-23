@@ -4,9 +4,9 @@
   "description": "SAVORIA — Haute Cuisine & Artisanal Gastronomy Website",
   "main": "index.html",
   "scripts": {
-    "dev": "node backend/server.js",
-    "start": "node backend/server.js",
-    "serve": "node backend/server.js"
+    "dev": "node backend/src/server.js",
+    "start": "node backend/src/server.js",
+    "serve": "node backend/src/server.js"
   },
   "keywords": [
     "restaurant",
