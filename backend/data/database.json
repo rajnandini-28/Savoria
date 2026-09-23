@@ -17,6 +17,45 @@
   ],
   "orders": [
     {
+      "orderRef": "SAV-IND-912913",
+      "userId": null,
+      "customerName": "Maharaja Yuvraj",
+      "email": "yuvraj@savoria.in",
+      "phone": "+91 98101 23456",
+      "orderType": "delivery",
+      "orderTypeLabel": "Royal White-Glove Chauffeur Delivery",
+      "deliveryAddress": "450 Heritage Marg, New Delhi",
+      "tableNumber": "",
+      "prepTime": "As soon as prepared fresh (~35 min)",
+      "specialInstructions": "",
+      "items": [
+        {
+          "id": "dum-biryani",
+          "title": "Awadhi Biryani",
+          "price": 1250,
+          "quantity": 1
+        }
+      ],
+      "financials": {
+        "subtotal": 1250,
+        "discount": 0,
+        "discountedSubtotal": 1250,
+        "gstRate": 0.05,
+        "gst": 63,
+        "tipPercent": 10,
+        "tipAmount": 125,
+        "total": 1438
+      },
+      "payment": {
+        "method": "UPI Instant Pay",
+        "status": "Authorized & Secured",
+        "transactionId": "TXN-1790166730559"
+      },
+      "status": "Received",
+      "assignedStaff": "Ustad Imran Qureshi (Master Chef)",
+      "createdAt": "2026-09-23T12:32:10.559Z"
+    },
+    {
       "orderRef": "SAV-IND-674560",
       "userId": null,
       "customerName": "Maharaja Yuvraj",
@@ -186,7 +225,7 @@
           "title": "Kakori Galouti Kebab",
           "price": 950,
           "image": "",
-          "quantity": 6
+          "quantity": 8
         }
       ],
       "couponCode": null,

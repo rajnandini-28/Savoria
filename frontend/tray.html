@@ -284,14 +284,42 @@
                     <span>•</span>
                     <a href="index.html#reservations">Reserve Table</a>
                     <span>•</span>
-                    <a href="kitchen-orders.html" target="_blank" title="Internal Kitchen Staff Portal"><i class="fa-solid fa-lock"></i> Staff / Kitchen Line</a>
+                    <a href="admin.html"><i class="fa-solid fa-lock"></i> Staff / Admin Portal</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Luxury Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="index.html#hero" class="mobile-bottom-item" id="mbNavHome">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="index.html#menu" class="mobile-bottom-item" id="mbNavMenu">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Menu</span>
+        </a>
+        <a href="tray.html" class="mobile-bottom-item mobile-bottom-cart-slot active" id="mbNavTray">
+            <div class="mb-cart-icon-wrapper">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="mb-cart-badge" id="mobileCartBadge">0</span>
+            </div>
+            <span>Tray</span>
+        </a>
+        <a href="auth.html" class="mobile-bottom-item" id="mbNavProfile">
+            <i class="fa-solid fa-user"></i>
+            <span id="mbNavProfileLabel">Account</span>
+        </a>
+        <a href="admin.html" class="mobile-bottom-item" id="mbNavAdmin">
+            <i class="fa-solid fa-crown"></i>
+            <span>Admin</span>
+        </a>
+    </nav>
+
     <!-- App Logic -->
     <script src="js/store.js"></script>
+    <script src="js/router.js"></script>
     <script src="app.js?v=4.0"></script>
 </body>
 </html>

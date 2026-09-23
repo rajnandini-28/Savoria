@@ -1970,8 +1970,10 @@ window.addUpsellToTray = function (dishId) {
 
     function renderCart() {
         const countBadge = document.getElementById('cartCountBadge');
+        const mobileBadge = document.getElementById('mobileCartBadge');
         const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
         if (countBadge) countBadge.textContent = totalItemCount;
+        if (mobileBadge) mobileBadge.textContent = totalItemCount;
 
         const itemsContainer = document.getElementById('cartItemsContainer');
         const cartFooter = document.getElementById('cartFooter');
@@ -3176,9 +3178,19 @@ window.addUpsellToTray = function (dishId) {
 
         const toggleBtn = document.getElementById('adminSidebarToggle');
         const sidebar = document.getElementById('adminSidebar');
+        const overlay = document.getElementById('adminSidebarOverlay');
+
         if (toggleBtn && sidebar) {
             toggleBtn.addEventListener('click', () => {
                 sidebar.classList.toggle('open');
+                if (overlay) overlay.classList.toggle('active', sidebar.classList.contains('open'));
+            });
+        }
+
+        if (overlay && sidebar) {
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
             });
         }
     };
@@ -3216,7 +3228,9 @@ window.addUpsellToTray = function (dishId) {
         if (titleEl) titleEl.textContent = titles[tabName] || 'Admin Suite';
 
         const sidebar = document.getElementById('adminSidebar');
+        const overlay = document.getElementById('adminSidebarOverlay');
         if (sidebar) sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
     };
 
     let cachedAdminOrders = [];

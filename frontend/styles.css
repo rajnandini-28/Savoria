@@ -8335,12 +8335,13 @@ img, video, iframe, svg {
     }
     .admin-sidebar.open {
         left: 0;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.8);
     }
     .admin-main-content {
         margin-left: 0;
     }
     .admin-menu-toggle {
-        display: block;
+        display: flex;
     }
     .admin-stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -8355,12 +8356,230 @@ img, video, iframe, svg {
         grid-template-columns: 1fr;
     }
     .admin-content-area {
-        padding: 16px;
+        padding: 14px 10px 80px;
     }
     .admin-topbar {
-        padding: 0 16px;
+        padding: 0 14px;
+        height: 60px;
+    }
+    .admin-topbar-title h1 {
+        font-size: 1.1rem;
+    }
+    .admin-topbar-title p {
+        display: none;
+    }
+    .admin-search-box {
+        display: none;
+    }
+    .admin-user-pill span {
+        display: none;
+    }
+    .admin-card {
+        padding: 16px 12px;
+        border-radius: var(--radius-sm);
+    }
+    .admin-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .admin-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -12px;
+        padding: 0 12px;
+    }
+    .admin-table {
+        min-width: 580px;
+    }
+    .admin-table th, .admin-table td {
+        padding: 10px 8px;
+        font-size: 0.82rem;
+    }
+    .kds-card {
+        padding: 14px;
+    }
+    .kds-actions-bar .btn {
+        flex: 1;
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 0.78rem;
     }
 }
+
+/* ==========================================================================
+   SAVORIA LUXURY MOBILE BOTTOM NAVIGATION BAR
+   ========================================================================== */
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1200;
+    background: rgba(11, 10, 16, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(245, 176, 65, 0.25);
+    padding: 6px 10px calc(6px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    body:not(.admin-page-body) {
+        padding-bottom: calc(65px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+.mobile-bottom-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    min-width: 54px;
+    position: relative;
+}
+
+.mobile-bottom-item i {
+    font-size: 1.15rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mobile-bottom-item.active,
+.mobile-bottom-item:active,
+.mobile-bottom-item:hover {
+    color: var(--gold-primary);
+}
+
+.mobile-bottom-item.active i {
+    color: var(--gold-primary);
+    transform: translateY(-2px);
+    text-shadow: 0 0 12px rgba(245, 176, 65, 0.5);
+}
+
+.mobile-bottom-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 16px;
+    height: 2px;
+    background: var(--gold-gradient);
+    border-radius: 999px;
+}
+
+.mobile-bottom-cart-slot {
+    position: relative;
+}
+
+.mb-cart-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.mb-cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: var(--gold-gradient);
+    color: #0c0c12;
+    font-size: 0.62rem;
+    font-weight: 800;
+    min-width: 17px;
+    height: 17px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Admin Sidebar Overlay on Mobile */
+.admin-sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1040;
+}
+
+.admin-sidebar-overlay.active {
+    display: block;
+}
+
+/* Touch Input & Button Mobile Optimization */
+@media (max-width: 768px) {
+    input, select, textarea, button {
+        font-size: 16px !important; /* Prevents auto-zoom in iOS Safari */
+    }
+    
+    .btn {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* Sticky Dish Action Bar on Mobile */
+    .dish-mobile-sticky-bar {
+        position: fixed;
+        bottom: calc(58px + env(safe-area-inset-bottom, 0px));
+        left: 0;
+        right: 0;
+        background: rgba(14, 13, 21, 0.95);
+        backdrop-filter: blur(14px);
+        border-top: 1px solid var(--gold-border);
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        z-index: 1100;
+        box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .dish-mobile-sticky-bar .dish-sticky-price {
+        font-family: var(--font-heading);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--gold-primary);
+    }
+    
+    .dish-mobile-sticky-bar .btn-sticky-add {
+        flex: 1;
+        height: 42px;
+        font-size: 0.85rem;
+    }
+    
+    /* Horizontal Swiper Containers */
+    .mobile-scroll-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        display: flex;
+        gap: 12px;
+        padding-bottom: 8px;
+    }
+    
+    .mobile-scroll-container::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 
 
 
