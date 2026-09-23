@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/tray",
+      "destination": "/frontend/tray.html"
+    },
+    {
+      "source": "/auth",
+      "destination": "/frontend/auth.html"
+    },
+    {
+      "source": "/dish",
+      "destination": "/frontend/dish.html"
+    },
+    {
+      "source": "/payment",
+      "destination": "/frontend/payment.html"
+    },
+    {
+      "source": "/order-confirm",
+      "destination": "/frontend/order-confirm.html"
+    },
+    {
+      "source": "/kitchen-orders",
+      "destination": "/frontend/kitchen-orders.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/frontend/admin.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
+    }
+  ]
+}

@@ -145,16 +145,18 @@ app.use(errorHandler);
 /* ==========================================================================
    START SERVER
    ========================================================================== */
-const server = app.listen(PORT, () => {
-    console.log(`\n=============================================================`);
-    console.log(`⚜️  SAVORIA ROYAL HAUTE CUISINE PRODUCTION BACKEND ACTIVE`);
-    console.log(`🌐 Server Running on: http://localhost:${PORT}`);
-    console.log(`🔐 JWT Auth API:      http://localhost:${PORT}/api/auth`);
-    console.log(`📅 Reservations API:  http://localhost:${PORT}/api/reservations (Dual Email)`);
-    console.log(`👨‍🍳 Kitchen Orders API: http://localhost:${PORT}/api/orders`);
-    console.log(`📩 Contact Concierge: http://localhost:${PORT}/api/contact (Dual Email)`);
-    console.log(`⭐ Guest Reviews API: http://localhost:${PORT}/api/reviews`);
-    console.log(`=============================================================\n`);
-});
+if (require.main === module || !process.env.VERCEL) {
+    const server = app.listen(PORT, () => {
+        console.log(`\n=============================================================`);
+        console.log(`⚜️  SAVORIA ROYAL HAUTE CUISINE PRODUCTION BACKEND ACTIVE`);
+        console.log(`🌐 Server Running on: http://localhost:${PORT}`);
+        console.log(`🔐 JWT Auth API:      http://localhost:${PORT}/api/auth`);
+        console.log(`📅 Reservations API:  http://localhost:${PORT}/api/reservations (Dual Email)`);
+        console.log(`👨‍🍳 Kitchen Orders API: http://localhost:${PORT}/api/orders`);
+        console.log(`📩 Contact Concierge: http://localhost:${PORT}/api/contact (Dual Email)`);
+        console.log(`⭐ Guest Reviews API: http://localhost:${PORT}/api/reviews`);
+        console.log(`=============================================================\n`);
+    });
+}
 
 module.exports = app;
