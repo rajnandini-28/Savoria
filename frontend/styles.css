@@ -7074,11 +7074,736 @@ button, input, select, textarea {
         grid-template-columns: 1fr;
     }
     .payment-methods-nav {
-        flex-direction: column;
+        flex-direction: row;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 8px;
+        scrollbar-width: none;
+    }
+    .payment-methods-nav::-webkit-scrollbar {
+        display: none;
+    }
+    .pay-tab-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
     }
     .nb-banks-grid, .cod-modes-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* ==========================================================================
+   SAVORIA COMPREHENSIVE ULTRA-RESPONSIVE MOBILE ENGINE
+   Tailored for Mobile Phones (320px – 768px) & Tablets (768px – 1024px)
+   ========================================================================== */
+
+/* Global Mobile Fixes */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+}
+
+img, video, iframe, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* TABLET & IPAD (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .nav-container {
+        padding: 12px 20px;
+    }
+
+    .nav-menu {
+        display: none !important;
+    }
+
+    .mobile-toggle {
+        display: flex !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-tagline, .hero-cta-group, .hero-stats {
+        justify-content: center !important;
+    }
+
+    .hero-description {
+        margin: 0 auto 30px !important;
+    }
+
+    .about-grid, .highlights-grid, .experience-wrapper, .reservation-box-wrapper, .contact-grid, .newsletter-card {
+        grid-template-columns: 1fr !important;
+    }
+
+    .about-images {
+        max-width: 520px;
+        margin: 0 auto 30px;
+    }
+
+    .tray-grid-container {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+    }
+
+    .dish-detail-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    .auth-card-wrapper {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* PHONES & SMALL SCREENS (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Top Bar */
+    .top-bar {
+        padding: 6px 0;
+    }
+    .top-bar-container {
+        padding: 0 14px;
+        justify-content: center;
+        gap: 10px;
+    }
+    .top-bar-links .live-status,
+    .top-bar-links span {
+        display: none !important;
+    }
+    .badge-award {
+        font-size: 0.72rem;
+        padding: 3px 8px;
+    }
+    .top-phone {
+        font-size: 0.75rem;
+    }
+
+    /* Navigation Header */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(9, 9, 14, 0.95) !important;
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(245, 176, 65, 0.15);
+    }
+
+    .nav-container {
+        padding: 8px 14px !important;
+        gap: 8px !important;
+    }
+
+    .logo {
+        gap: 8px !important;
+    }
+
+    .logo-symbol {
+        font-size: 1.15rem;
+    }
+
+    .logo-text {
+        font-size: 1.1rem !important;
+        letter-spacing: 0.08em !important;
+    }
+
+    .logo-sub {
+        font-size: 0.52rem !important;
+        letter-spacing: 0.06em !important;
+    }
+
+    .nav-actions {
+        gap: 6px !important;
+    }
+
+    .nav-reserve-btn {
+        display: none !important;
+    }
+
+    .cart-pill-btn {
+        height: 34px !important;
+        padding: 0 10px !important;
+        font-size: 0.8rem !important;
+        gap: 5px !important;
+    }
+
+    .cart-pill-text {
+        display: none !important;
+    }
+
+    .user-profile-pill {
+        height: 34px !important;
+        padding: 0 6px !important;
+        gap: 4px !important;
+    }
+
+    .user-profile-name {
+        display: none !important;
+    }
+
+    .user-profile-pill i {
+        display: none !important;
+    }
+
+    .nav-auth-btn {
+        height: 34px !important;
+        padding: 0 10px !important;
+        font-size: 0.78rem !important;
+    }
+
+    /* Mobile Drawer Menu */
+    .mobile-drawer {
+        width: 86% !important;
+        max-width: 320px !important;
+        padding: 85px 22px 35px !important;
+        background: #0d0d14 !important;
+        border-left: 1px solid var(--gold-border);
+    }
+
+    .mobile-links {
+        gap: 16px !important;
+        margin-bottom: 24px !important;
+    }
+
+    .mobile-link {
+        font-size: 1.05rem !important;
+        padding: 6px 0;
+    }
+
+    .mobile-drawer-footer {
+        gap: 16px !important;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 105px 0 50px !important;
+        min-height: auto !important;
+    }
+
+    .hero-title {
+        font-size: clamp(1.85rem, 7.5vw, 2.8rem) !important;
+        line-height: 1.18 !important;
+        margin-bottom: 16px !important;
+    }
+
+    .hero-tagline {
+        font-size: 0.75rem !important;
+        letter-spacing: 0.12em !important;
+        margin-bottom: 14px !important;
+    }
+
+    .hero-description {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 22px !important;
+        padding: 0 6px;
+    }
+
+    .hero-cta-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto 26px !important;
+        gap: 12px !important;
+    }
+
+    .hero-cta-group .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        height: 48px !important;
+        font-size: 0.92rem !important;
+    }
+
+    .hero-stats {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+        padding: 16px 10px !important;
+        border-radius: var(--radius-md);
+        background: rgba(22, 19, 29, 0.7) !important;
+        border: 1px solid var(--gold-border);
+    }
+
+    .hero-stat-item {
+        text-align: center;
+    }
+
+    .hero-stat-number {
+        font-size: 1.25rem !important;
+    }
+
+    .hero-stat-label {
+        font-size: 0.68rem !important;
+    }
+
+    .hero-visual {
+        margin-top: 24px !important;
+        position: relative;
+    }
+
+    .hero-image-main {
+        border-radius: 14px !important;
+        max-height: 320px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .hero-floating-card {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        margin-top: 14px !important;
+        box-sizing: border-box;
+    }
+
+    .hero-awards-badge {
+        position: static !important;
+        transform: none !important;
+        margin-top: 10px !important;
+        justify-content: center;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Highlights Section */
+    .highlights-section {
+        padding: 50px 0 !important;
+    }
+
+    .section-title {
+        font-size: clamp(1.6rem, 5.5vw, 2.2rem) !important;
+    }
+
+    .highlights-grid {
+        gap: 16px !important;
+    }
+
+    .highlight-card {
+        padding: 20px !important;
+    }
+
+    /* Menu & Dish Filtering */
+    .menu-section {
+        padding: 50px 0 !important;
+    }
+
+    .menu-filter-bar {
+        margin-bottom: 24px !important;
+    }
+
+    .category-nav {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 6px 4px 12px !important;
+        gap: 8px !important;
+        justify-content: flex-start !important;
+        scrollbar-width: none !important;
+    }
+
+    .category-nav::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .category-btn {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        padding: 8px 14px !important;
+        font-size: 0.8rem !important;
+        border-radius: 999px !important;
+    }
+
+    .diet-filters {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        justify-content: center !important;
+        margin-top: 10px !important;
+    }
+
+    .diet-toggle {
+        padding: 5px 10px !important;
+        font-size: 0.74rem !important;
+    }
+
+    .menu-search-wrapper {
+        max-width: 100% !important;
+        margin-bottom: 16px !important;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+    }
+
+    .dish-card-img-wrapper {
+        height: 210px !important;
+    }
+
+    .dish-card-body {
+        padding: 18px !important;
+    }
+
+    .dish-title {
+        font-size: 1.15rem !important;
+    }
+
+    .dish-price {
+        font-size: 1.1rem !important;
+    }
+
+    /* Floor Plan & Reservations */
+    .reservation-section {
+        padding: 50px 0 !important;
+    }
+
+    .reservation-form-pane, .reservation-info-pane {
+        padding: 24px 18px !important;
+    }
+
+    .res-datetime-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .floor-map-wrapper {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 14px !important;
+    }
+
+    /* Experience & Sommelier Quiz */
+    .experience-gallery-mosaic {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .sommelier-quiz-banner {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 16px !important;
+        padding: 24px 16px !important;
+    }
+
+    .quiz-banner-cta {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* Testimonials & Reviews */
+    .testimonial-card {
+        padding: 24px 18px !important;
+    }
+
+    .review-submit-card {
+        padding: 24px 18px !important;
+    }
+
+    /* Contact & Concierge */
+    .contact-info-column, .contact-form-column {
+        padding: 24px 18px !important;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 50px 0 24px !important;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+        text-align: center !important;
+    }
+
+    .footer-brand-col .logo {
+        justify-content: center !important;
+    }
+
+    .footer-social-links {
+        justify-content: center !important;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+        gap: 12px !important;
+        text-align: center !important;
+    }
+
+    .footer-legal {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
+    /* Cart Slide-Out Drawer */
+    .cart-drawer {
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+
+    .cart-drawer-header {
+        padding: 16px 20px !important;
+    }
+
+    .cart-items-list {
+        padding: 14px 18px !important;
+    }
+
+    .cart-drawer-footer {
+        padding: 16px 18px 24px !important;
+    }
+
+    .cart-item-card {
+        padding: 12px !important;
+    }
+
+    .cart-item-thumb {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    /* Dedicated Dish Page (dish.html) */
+    .dish-detail-main {
+        padding: 95px 0 50px !important;
+    }
+
+    .dish-gallery-img {
+        max-height: 280px !important;
+    }
+
+    .dish-purchase-bar {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .qty-selector-lg {
+        width: 100% !important;
+        justify-content: center !important;
+        height: 46px !important;
+    }
+
+    .btn-add-tray-lg, .dish-purchase-bar .btn-secondary {
+        width: 100% !important;
+        justify-content: center !important;
+        height: 46px !important;
+    }
+
+    /* Dedicated Order Tray Page (tray.html) */
+    .tray-main-section {
+        padding: 95px 0 50px !important;
+    }
+
+    .tray-page-title {
+        font-size: clamp(1.7rem, 6vw, 2.3rem) !important;
+    }
+
+    .tray-card-box {
+        padding: 20px 14px !important;
+    }
+
+    .tray-item-row {
+        display: grid !important;
+        grid-template-columns: 70px 1fr !important;
+        gap: 12px !important;
+        padding: 14px 10px !important;
+    }
+
+    .tray-item-thumb {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .tray-item-controls {
+        grid-column: 1 / -1 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+        padding-top: 10px !important;
+        margin-top: 6px !important;
+    }
+
+    .tray-item-price-col {
+        grid-column: 1 / -1 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
+        padding-top: 8px !important;
+    }
+
+    .tray-checkout-card {
+        padding: 22px 16px !important;
+    }
+
+    .service-type-selector {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .tray-tip-pills {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 6px !important;
+    }
+
+    .t-tip-btn {
+        padding: 8px 2px !important;
+        font-size: 0.76rem !important;
+    }
+
+    .upsell-items-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Dedicated Payment Page (payment.html) */
+    .payment-main-section {
+        padding: 95px 0 50px !important;
+    }
+
+    .payment-page-title {
+        font-size: clamp(1.7rem, 6vw, 2.3rem) !important;
+    }
+
+    .pay-methods-nav {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 12px !important;
+        gap: 8px !important;
+        scrollbar-width: none !important;
+    }
+
+    .pay-methods-nav::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .pay-tab-btn {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        padding: 9px 14px !important;
+        font-size: 0.8rem !important;
+    }
+
+    .virtual-credit-card {
+        width: 100% !important;
+        max-width: 320px !important;
+        height: 190px !important;
+        padding: 16px !important;
+        margin: 0 auto 20px !important;
+    }
+
+    .vc-number {
+        font-size: 1.05rem !important;
+    }
+
+    .upi-quick-apps-grid, .nb-banks-grid, .cod-modes-grid, .wallets-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .payment-card-body {
+        padding: 20px 16px !important;
+    }
+
+    .pay-order-summary-card {
+        padding: 22px 16px !important;
+    }
+
+    /* Modals & Popups */
+    .modal-dialog {
+        width: 95% !important;
+        max-width: 95vw !important;
+        margin: 15px auto !important;
+        max-height: 88vh !important;
+        border-radius: 14px !important;
+        padding: 22px 16px !important;
+    }
+
+    .modal-close-btn {
+        top: 10px !important;
+        right: 10px !important;
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 0.95rem !important;
+    }
+
+    /* Auth Page (auth.html) */
+    .auth-main-section {
+        padding: 95px 0 50px !important;
+    }
+
+    .auth-side-card, .auth-form-card {
+        padding: 26px 18px !important;
+    }
+
+    .auth-side-footer {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    .side-stat .stat-number {
+        font-size: 1.1rem !important;
+    }
+
+    /* Order Confirm (order-confirm.html) */
+    .confirm-main-section {
+        padding: 95px 0 50px !important;
+    }
+
+    .confirm-receipt-box {
+        padding: 22px 16px !important;
+    }
+
+    .routing-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* VERY SMALL SCREENS (max-width: 400px) */
+@media (max-width: 400px) {
+    .container {
+        padding: 0 12px !important;
+    }
+
+    .nav-container {
+        padding: 8px 10px !important;
+    }
+
+    .logo-text {
+        font-size: 0.98rem !important;
+    }
+
+    .hero-title {
+        font-size: 1.7rem !important;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .tray-tip-pills {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .upi-quick-apps-grid, .nb-banks-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
 
 
