@@ -728,12 +728,26 @@ function setCurrentUser(user) {
 window.logoutUser = function () {
     try {
         localStorage.removeItem('savoria_current_user');
-        renderNavAuth();
-        showToast('You have been safely signed out.', 'info');
-        if (document.getElementById('trayGridContainer')) {
-            initTrayPage();
+        localStorage.removeItem('savoria_jwt_token');
+        localStorage.removeItem('savoria_cart');
+        localStorage.removeItem('savoria_applied_coupon');
+        cart = [];
+
+        if (typeof store !== 'undefined' && store && store.dispatch) {
+            store.dispatch({ type: 'USER_LOGOUT' });
+            store.dispatch({ type: 'CART_CLEAR' });
         }
-    } catch (e) { }
+
+        renderNavAuth();
+        renderCart();
+        showToast('You have been safely signed out and tray cleared.', 'info');
+
+        if (document.getElementById('trayGridContainer') || document.getElementById('trayPageItemsList')) {
+            renderTrayPage();
+        }
+    } catch (e) {
+        console.error('Logout error:', e);
+    }
 };
 
 function renderNavAuth() {
