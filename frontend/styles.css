@@ -7167,36 +7167,21 @@ img, video, iframe, svg {
 
 /* PHONES & SMALL SCREENS (max-width: 768px) */
 @media (max-width: 768px) {
-    /* Top Bar */
+    /* Top Bar - hidden on mobile to avoid header clutter and overlapping */
     .top-bar {
-        padding: 6px 0;
-    }
-    .top-bar-container {
-        padding: 0 14px;
-        justify-content: center;
-        gap: 10px;
-    }
-    .top-bar-links .live-status,
-    .top-bar-links span {
         display: none !important;
     }
-    .badge-award {
-        font-size: 0.72rem;
-        padding: 3px 8px;
-    }
-    .top-phone {
-        font-size: 0.75rem;
-    }
 
-    /* Navigation Header */
+    /* Navigation Header - sticky to prevent overlapping content */
     .header {
-        position: fixed;
+        position: sticky;
         top: 0;
         left: 0;
         width: 100%;
         z-index: 1000;
         background: rgba(9, 9, 14, 0.95) !important;
         backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid rgba(245, 176, 65, 0.15);
     }
 
@@ -7286,8 +7271,9 @@ img, video, iframe, svg {
     }
 
     /* Hero Section */
+    .hero,
     .hero-section {
-        padding: 105px 0 50px !important;
+        padding: 35px 0 50px !important;
         min-height: auto !important;
     }
 
